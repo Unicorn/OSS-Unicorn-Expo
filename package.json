@@ -1,13 +1,13 @@
 {
   "name": "expo-unicorn",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "build": "pnpm -r run build",
-    "clean": "pnpm -r run clean",
+    "clean": "pnpm -r run clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && rm -rf dist build",
     "test": "pnpm -r run test",
     "publish": "pnpm publish --filter ./packages/*"
   },
@@ -27,5 +27,19 @@
     "react-dom": "18.2.0",
     "react-native-reanimated": "^3.16.5",
     "react-native-svg": "^15.10.1"
+  },
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js"
+    },
+    "./chuz-ui": {
+      "import": "./chuz-ui/src/index.js",
+      "require": "./chuz-ui/src/index.js"
+    },
+    "./tenor-client": {
+      "import": "./tenor/src/index.js",
+      "require": "./tenor/src/index.js"
+    }
   }
 }
