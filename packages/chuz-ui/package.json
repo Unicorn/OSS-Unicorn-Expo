@@ -1,7 +1,7 @@
 {
-  "name": "@unicorn/chuz-ui",
+  "name": "@expo-unicorn/chuz-ui",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "author": "www.unicorn.love",
   "description": "Chuz UI is a React Native UI library that allows you to quickly build beautiful interfaces.",
   "license": "MIT",

@@ -1,7 +1,7 @@
 {
-  "name": "@unicorn/tenor",
+  "name": "@expo-unicorn/tenor",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "author": "www.unicorn.love",
   "license": "MIT",
   "main": "dist/index.js",

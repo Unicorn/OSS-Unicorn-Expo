@@ -1,6 +1,6 @@
 {
-  "name": "unicorn",
-  "private": true,
+  "name": "expo-unicorn",
+  "private": false,
   "version": "1.0.0",
   "workspaces": [
     "packages/*"
