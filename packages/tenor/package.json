@@ -1,0 +1,29 @@
+{
+  "name": "@unicorn/tenor",
+  "version": "1.0.0",
+  "private": true,
+  "author": "www.unicorn.love",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "peerDependencies": {
+    "react": "catalog:",
+    "react-native": "catalog:",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "countries-list": "^3.1.1"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "expo": "catalog:"
+  }
+}

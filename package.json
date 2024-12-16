@@ -1,0 +1,31 @@
+{
+  "name": "unicorn",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean",
+    "test": "pnpm -r run test",
+    "publish": "pnpm publish --filter ./packages/*"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.13",
+    "@types/react": "^18.2.6",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "expo-localization": "^16.0.0",
+    "expo-router": "^4.0.11",
+    "lodash": "^4.17.21",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native-reanimated": "^3.16.5",
+    "react-native-svg": "^15.10.1"
+  }
+}

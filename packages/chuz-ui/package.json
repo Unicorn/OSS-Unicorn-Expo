@@ -1,0 +1,32 @@
+{
+  "name": "@unicorn/chuz-ui",
+  "version": "0.1.0",
+  "private": true,
+  "author": "www.unicorn.love",
+  "description": "Chuz UI is a React Native UI library that allows you to quickly build beautiful interfaces.",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "peerDependencies": {
+    "@expo/vector-icons": "*",
+    "expo": "catalog:",
+    "expo-crypto": "*",
+    "expo-secure-store": "*",
+    "@shopify/restyle": "*",
+    "react": "catalog:",
+    "react-native": "catalog:",
+    "typescript": "catalog:",
+    "react-native-safe-area-context": "*",
+    "@react-native-async-storage/async-storage": "*",
+    "i18next": "*",
+    "react-i18next": "*"
+  },
+  "files": [
+    "dist/*"
+  ]
+}
