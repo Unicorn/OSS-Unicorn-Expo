@@ -1,51 +1,55 @@
 {
   "name": "expo-unicorn",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
-  "workspaces": [
-    "packages/*"
-  ],
+  "author": "www.unicorn.love",
+  "description": "Chuz UI is a React Native UI library that allows you to quickly build beautiful interfaces.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./chuz-ui": {
-      "import": "./packages/chuz-ui/dist/index.mjs",
-      "require": "./packages/chuz-ui/dist/index.js"
-    },
-    "./tenor-client": {
-      "import": "./packages/tenor-client/dist/index.mjs",
-      "require": "./packages/tenor-client/dist/index.js"
     }
   },
   "scripts": {
-    "build": "pnpm -r run build",
-    "build:chuz-ui": "tsc -p packages/chuz-ui/tsconfig.json",
-    "build:tenor-client": "tsc -p packages/tenor-client/tsconfig.json",
-    "clean": "pnpm -r run clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && rm -rf dist build",
-    "test": "pnpm -r run test",
-    "publish": "pnpm publish --filter ./packages/*"
+    "build": "tsup",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
+    "@swc/core": "^1.10.1",
     "@types/lodash": "^4.17.13",
     "@types/react": "^18.2.6",
     "eslint": "^9.17.0",
     "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "@expo/vector-icons": "*",
+    "@react-native-async-storage/async-storage": "*",
+    "@shopify/restyle": "*",
     "countries-list": "^3.1.1",
-    "expo-localization": "^16.0.0",
-    "expo-router": "^4.0.11",
-    "lodash": "^4.17.21",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-native-reanimated": "^3.16.5",
-    "react-native-svg": "^15.10.1"
+    "expo": "*",
+    "expo-crypto": "*",
+    "expo-localization": "*",
+    "expo-router": "*",
+    "expo-secure-store": "*",
+    "i18next": "*",
+    "lodash": "*",
+    "react": "*",
+    "react-i18next": "*",
+    "react-native": "*",
+    "react-native-reanimated": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-svg": "*",
+    "typescript": "*"
   }
 }
