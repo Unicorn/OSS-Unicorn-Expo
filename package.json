@@ -1,7 +1,7 @@
 {
   "name": "expo-unicorn",
   "private": false,
-  "version": "1.2.0",
+  "version": "1.3.0",
   "license": "MIT",
   "author": "www.unicorn.love",
   "description": "Chuz UI is a React Native UI library that allows you to quickly build beautiful interfaces.",
@@ -36,7 +36,7 @@
     "@expo/vector-icons": "*",
     "@react-native-async-storage/async-storage": "*",
     "@shopify/restyle": "*",
-    "countries-list": "^3.1.1",
+    "countries-list": "*",
     "expo": "*",
     "expo-crypto": "*",
     "expo-localization": "*",
