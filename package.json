@@ -1,22 +1,11 @@
 {
   "name": "expo-unicorn",
   "private": false,
-  "version": "1.3.0",
+  "version": "1.4.0",
   "license": "MIT",
   "author": "www.unicorn.love",
   "description": "Chuz UI is a React Native UI library that allows you to quickly build beautiful interfaces.",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist/*"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  },
+  "main": "./src/",
   "scripts": {
     "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,7 +15,7 @@
   "devDependencies": {
     "@swc/core": "^1.10.1",
     "@types/lodash": "^4.17.13",
-    "@types/react": "^18.2.6",
+    "@types/react": "^18.3.1",
     "eslint": "^9.17.0",
     "prettier": "^3.4.2",
     "tsup": "^8.3.5",
@@ -51,5 +40,13 @@
     "react-native-safe-area-context": "*",
     "react-native-svg": "*",
     "typescript": "*"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
   }
 }

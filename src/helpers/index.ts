@@ -2,8 +2,6 @@ import { Platform } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { isEqual } from "lodash";
 
-export { PathPatched } from "./PatchedPath";
-
 export const itemInArray = <T>(item: T, items: T[]): boolean => {
   return items.findIndex((s) => isEqual(s, item)) !== -1;
 };

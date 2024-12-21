@@ -5,9 +5,9 @@ import { FC, useEffect, useRef } from "react";
 import { useTheme } from "@shopify/restyle";
 import Svg, { Path } from "react-native-svg";
 
-import { PathPatched, isNativeDriver } from "../../helpers";
+import { isNativeDriver } from "../../helpers";
 
-const AnimatedPath = Animated.createAnimatedComponent(PathPatched);
+const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 interface Props extends ViewProps {
   color?: string;
