@@ -1,12 +1,11 @@
 /** @format */
 
-import { Pressable, PressableProps, PressableStateCallbackType } from 'react-native'
 import { ComponentProps, FC, Fragment } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 import { NavIcon } from './NavIcon'
 import { NavText } from './NavText'
-import { ChuzTheme, PressableState } from '../../types'
+import { ChuzTheme, PressableButton, PressableButtonProps, PressableState } from '../../types'
 
 const themeKey = 'navItemVariants'
 
@@ -18,12 +17,12 @@ export const navItemVariants: Partial<BaseTheme> = {
   },
 }
 
-const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Pressable>, ChuzTheme>(
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof PressableButton>, ChuzTheme>(
   [createVariant({ themeKey, defaults: navItemVariants.defaults })],
-  Pressable
+  PressableButton
 )
 
-interface Props extends PressableProps {
+interface Props extends PressableButtonProps {
   active?: boolean
   label: string
   icon?: keyof typeof MaterialIcons.glyphMap

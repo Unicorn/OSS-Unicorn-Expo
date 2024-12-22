@@ -1,13 +1,13 @@
 /** @format */
 
-import { Text, TextStyle, Pressable, PressableProps, PressableStateCallbackType, ViewStyle } from 'react-native'
+import { Text, TextStyle, ViewStyle } from 'react-native'
 
 import { ComponentProps, FC, Fragment, ReactNode } from 'react'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
 
-import { ChuzTheme, PressableState, SizeOptions } from '../../types'
+import { ChuzTheme, PressableButton, PressableButtonProps, PressableState, SizeOptions } from '../../types'
 import { spacing, fontSizes } from '../../config'
 import { LoadingIcon } from '../Icons/LoadingIcon'
 import { withFeatures } from '../Base'
@@ -37,12 +37,12 @@ export const buttonVariants: Partial<BaseTheme> = {
   },
 }
 
-const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Pressable>, ChuzTheme>(
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof PressableButton>, ChuzTheme>(
   [createVariant({ themeKey, defaults: buttonVariants.defaults })],
-  Pressable
+  PressableButton
 )
 
-export interface ButtonProps extends Partial<PressableProps> {
+export interface ButtonProps extends Partial<PressableButtonProps> {
   variant?: ButtonVariants
   type?: ButtonTypes
   size?: SizeOptions
@@ -81,7 +81,7 @@ export const ButtonBase: FC<ButtonProps> = ({
     return colors[`button_${v}_${type}_${t}_normal`]
   }
 
-  const buttonStyle = (state: PressableStateCallbackType): ViewStyle => {
+  const buttonStyle = (state: PressableState): ViewStyle => {
     const sx: ViewStyle = (style ?? {}) as ViewStyle
     const s: ViewStyle = {
       borderColor: getColorForState('border', state),
@@ -130,7 +130,7 @@ export const ButtonBase: FC<ButtonProps> = ({
     return { ...s, ...sx }
   }
 
-  const buildTextStyle = (state: PressableStateCallbackType): TextStyle => {
+  const buildTextStyle = (state: PressableState): TextStyle => {
     const s: TextStyle = { color: getColorForState('text', state) }
 
     s['fontSize'] = fontSizes[size]
@@ -138,7 +138,7 @@ export const ButtonBase: FC<ButtonProps> = ({
     return s
   }
 
-  const renderLabel = (state: PressableStateCallbackType): ReactNode | null => {
+  const renderLabel = (state: PressableState): ReactNode | null => {
     if (!showLabel) return null
 
     if (label || typeof children === 'string')

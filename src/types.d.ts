@@ -1,6 +1,6 @@
 /** @format */
 
-import { PressableStateCallbackType, ViewStyle } from 'react-native'
+import { PressableProps, PressableStateCallbackType, StyleProp, View, ViewStyle } from 'react-native'
 
 import { ReactNode } from 'react'
 
@@ -60,8 +60,16 @@ export interface RadarChartSetup {
 // Adding in because even though hovered state exists in RN, it's not typed properly
 export interface PressableState extends PressableStateCallbackType {
   pressed: boolean
-  hovered?: boolean
+  hovered: boolean
 }
+
+export interface PressableButtonProps extends Omit<PressableProps, 'children' | 'style'> {
+  children?: React.ReactNode | ((state: PressableState) => React.ReactNode) | undefined
+
+  style?: StyleProp<ViewStyle> | ((state: PressableState) => StyleProp<ViewStyle>) | undefined
+}
+
+export const PressableButton: React.ForwardRefExoticComponent<PressableButtonProps & React.RefAttributes<View>>
 
 export type ChuzTheme =
   | ({
