@@ -1,9 +1,11 @@
-import { FontSizes } from "../types";
+/** @format */
+
+import { FontSizes } from '../types'
 
 export const fonts = {
-  header: "Inter",
-  body: "Inter",
-};
+  header: 'Inter',
+  body: 'Inter',
+}
 
 export const fontSizes: FontSizes = {
   xxs: 10,
@@ -13,4 +15,4 @@ export const fontSizes: FontSizes = {
   l: 20,
   xl: 24,
   xxl: 28,
-};
+} as const

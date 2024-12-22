@@ -175,6 +175,3 @@ export const colors = {
   slider_background: '#D8EDE9',
   slider_text_area_background: '#BCE2DB',
 } as const
-
-export type RadarSetKey = `chart_radar_set${number}_${'label' | 'fill' | 'outline'}`
-export type Colors = typeof colors & Record<RadarSetKey, string>

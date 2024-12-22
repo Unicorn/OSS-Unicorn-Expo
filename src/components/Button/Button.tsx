@@ -1,13 +1,13 @@
 /** @format */
 
-import { Text, TextStyle, ViewStyle } from 'react-native'
+import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, Text, TextStyle, ViewStyle } from 'react-native'
 
 import { ComponentProps, FC, Fragment, ReactNode } from 'react'
 
 import { MaterialIcons } from '@expo/vector-icons'
-import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
+import { VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
 
-import { ChuzTheme, PressableButton, PressableButtonProps, PressableState, SizeOptions } from '../../types'
+import { ChuzTheme, SizeOptions } from '../../types'
 import { spacing, fontSizes } from '../../config'
 import { LoadingIcon } from '../Icons/LoadingIcon'
 import { withFeatures } from '../Base'
@@ -18,7 +18,7 @@ export type ButtonVariants = 'defaults' | 'outlined' | 'select'
 
 export type ButtonTypes = 'primary' | 'secondary' | 'neutral' | 'select' | 'green' | 'red'
 
-export const buttonVariants: Partial<BaseTheme> = {
+export const buttonVariants: Record<ButtonVariants, ViewStyle> = {
   defaults: {
     alignItems: 'center',
     borderRadius: 5,
@@ -27,7 +27,6 @@ export const buttonVariants: Partial<BaseTheme> = {
     flexWrap: 'nowrap',
     gap: 'xs',
     justifyContent: 'center',
-    width: 'min-content',
   },
   outlined: {},
   select: {
@@ -37,19 +36,19 @@ export const buttonVariants: Partial<BaseTheme> = {
   },
 }
 
-const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof PressableButton>, ChuzTheme>(
-  [createVariant({ themeKey, defaults: buttonVariants.defaults })],
-  PressableButton
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Pressable>, ChuzTheme>(
+  [createVariant({ themeKey })],
+  Pressable
 )
 
-export interface ButtonProps extends Partial<PressableButtonProps> {
+export interface ButtonProps extends Partial<PressableProps> {
   variant?: ButtonVariants
   type?: ButtonTypes
   size?: SizeOptions
   active?: boolean
   loading?: boolean
   icon?: keyof typeof MaterialIcons.glyphMap
-  label?: string
+  label?: ReactNode
   showIcon?: boolean
   showLabel?: boolean
   style?: ViewStyle
@@ -57,7 +56,7 @@ export interface ButtonProps extends Partial<PressableButtonProps> {
 }
 
 export const ButtonBase: FC<ButtonProps> = ({
-  variant,
+  variant = 'defaults',
   type = 'neutral',
   size = 'm',
   active,
@@ -70,19 +69,19 @@ export const ButtonBase: FC<ButtonProps> = ({
   style,
   ...props
 }) => {
-  const { colors } = useTheme()
+  const { colors } = useTheme<ChuzTheme>()
 
-  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableState): string => {
+  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableStateCallbackType): string => {
     const v = variant ?? 'default'
 
-    if (active) return colors[`button_${v}_${type}_${t}_active`]
-    if (state.hovered || state.pressed) return colors[`button_${v}_${type}_${t}_hover`]
+    if (active) return colors[`button_${v}_${type}_${t}_active`] as string
+    if (state.pressed) return colors[`button_${v}_${type}_${t}_hover`] as string
 
-    return colors[`button_${v}_${type}_${t}_normal`]
+    return colors[`button_${v}_${type}_${t}_normal`] as string
   }
 
-  const buttonStyle = (state: PressableState): ViewStyle => {
-    const sx: ViewStyle = (style ?? {}) as ViewStyle
+  const buttonStyle = (state: PressableStateCallbackType): ViewStyle => {
+    const sx: ViewStyle = style ?? {}
     const s: ViewStyle = {
       borderColor: getColorForState('border', state),
       backgroundColor: getColorForState('background', state),
@@ -90,61 +89,61 @@ export const ButtonBase: FC<ButtonProps> = ({
 
     switch (size) {
       case 'xxs':
-        s['paddingHorizontal'] = spacing.xs
-        s['paddingVertical'] = spacing.xxs
+        s.paddingHorizontal = spacing.xs
+        s.paddingVertical = spacing.xxs
         break
       case 'xs':
-        s['paddingHorizontal'] = spacing.s
-        s['paddingVertical'] = spacing.xxs
+        s.paddingHorizontal = spacing.s
+        s.paddingVertical = spacing.xxs
         break
       case 's':
-        s['paddingHorizontal'] = spacing.m
-        s['paddingVertical'] = spacing.xs
+        s.paddingHorizontal = spacing.m
+        s.paddingVertical = spacing.xs
         break
       case 'm':
-        s['paddingHorizontal'] = spacing.l
-        s['paddingVertical'] = spacing.s
+        s.paddingHorizontal = spacing.l
+        s.paddingVertical = spacing.s
         break
       case 'l':
-        s['paddingHorizontal'] = spacing.xl
-        s['paddingVertical'] = spacing.s
+        s.paddingHorizontal = spacing.xl
+        s.paddingVertical = spacing.s
         break
       case 'xl':
-        s['paddingHorizontal'] = spacing.xl
-        s['paddingVertical'] = spacing.s
+        s.paddingHorizontal = spacing.xl
+        s.paddingVertical = spacing.s
         break
       case 'xxl':
-        s['paddingHorizontal'] = spacing.xxl
-        s['paddingVertical'] = spacing.s
+        s.paddingHorizontal = spacing.xxl
+        s.paddingVertical = spacing.s
         break
       default:
-        s['paddingHorizontal'] = spacing.m
-        s['paddingVertical'] = spacing.xs
+        s.paddingHorizontal = spacing.m
+        s.paddingVertical = spacing.xs
         break
     }
 
-    s['shadowOffset'] = { width: 0, height: 2 }
-    s['shadowOpacity'] = 0.1
-    s['shadowRadius'] = 2
+    s.shadowOffset = { width: 0, height: 2 }
+    s.shadowOpacity = 0.1
+    s.shadowRadius = 2
 
     return { ...s, ...sx }
   }
 
-  const buildTextStyle = (state: PressableState): TextStyle => {
+  const buildTextStyle = (state: PressableStateCallbackType): StyleProp<TextStyle> => {
     const s: TextStyle = { color: getColorForState('text', state) }
 
-    s['fontSize'] = fontSizes[size]
+    s.fontSize = fontSizes[size] as number
 
     return s
   }
 
-  const renderLabel = (state: PressableState): ReactNode | null => {
+  const renderLabel = (state: PressableStateCallbackType): ReactNode | null => {
     if (!showLabel) return null
 
     if (label || typeof children === 'string')
       return (
         <Text numberOfLines={1} style={buildTextStyle(state)}>
-          {label ?? children?.toString()}
+          {label ?? (children as string).toString()}
         </Text>
       )
 
@@ -159,8 +158,8 @@ export const ButtonBase: FC<ButtonProps> = ({
       children={state => {
         return (
           <Fragment>
-            {loading && <LoadingIcon style={{ marginRight: spacing[size] ?? 18 }} />}
-            {icon && showIcon && <MaterialIcons name={icon} style={buildTextStyle(state)} size={spacing[size] ?? 18} />}
+            {loading && <LoadingIcon style={{ marginRight: spacing[size] }} />}
+            {icon && showIcon && <MaterialIcons name={icon} style={{ fontSize: fontSizes[size] as number }} size={spacing[size]} />}
             {renderLabel(state)}
           </Fragment>
         )
@@ -169,4 +168,4 @@ export const ButtonBase: FC<ButtonProps> = ({
   )
 }
 
-export const Button = withFeatures(ButtonBase)
+export const Scrap = withFeatures(ButtonBase)

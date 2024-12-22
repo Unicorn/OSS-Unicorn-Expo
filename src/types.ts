@@ -5,7 +5,9 @@ import { PressableProps, PressableStateCallbackType, StyleProp, View, ViewStyle 
 import { ReactNode } from 'react'
 
 import { chuzUILight, chuzUIDark } from './theme'
-import { Colors } from './config/colors'
+import { colors } from './config/colors'
+import { fontSizes } from './config/fonts'
+import { ButtonTypes } from './components'
 
 export interface ChuzContextType {
   theme: ChuzThemes
@@ -32,6 +34,10 @@ export type FontSizes = {
   [K in SizeOptions]: number
 }
 
+export type RadarSetKey = `chart_radar_set${number}_${'label' | 'fill' | 'outline'}`
+export type ButtonSetKey = `button_${string}_${string}_${string}_${'active' | 'hover' | 'normal'}`
+export type Colors = typeof colors & Record<RadarSetKey, string> & Record<ButtonSetKey, string>
+
 export type SelectOption = {
   value: string | number
   label: string
@@ -56,20 +62,6 @@ export interface RadarChartSetup {
   max: number
   size: number
 }
-
-// Adding in because even though hovered state exists in RN, it's not typed properly
-export interface PressableState extends PressableStateCallbackType {
-  pressed: boolean
-  hovered: boolean
-}
-
-export interface PressableButtonProps extends Omit<PressableProps, 'children' | 'style'> {
-  children?: React.ReactNode | ((state: PressableState) => React.ReactNode) | undefined
-
-  style?: StyleProp<ViewStyle> | ((state: PressableState) => StyleProp<ViewStyle>) | undefined
-}
-
-export declare const PressableButton: React.ForwardRefExoticComponent<PressableButtonProps & React.RefAttributes<View>>
 
 export type ChuzTheme =
   | ({
