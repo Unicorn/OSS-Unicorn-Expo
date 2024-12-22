@@ -6,10 +6,10 @@ import { getItemAsync, setItemAsync } from 'expo-secure-store'
 
 const createTokenCache = () => {
   return {
-    getToken: key => {
+    getToken: (key: string) => {
       return getItemAsync(key)
     },
-    saveToken: (key, token) => {
+    saveToken: (key: string, token: string) => {
       return setItemAsync(key, token)
     },
   }

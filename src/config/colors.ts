@@ -1,4 +1,6 @@
-import { palette } from "./palette";
+/** @format */
+
+import { palette } from './palette'
 
 export const colors = {
   /**
@@ -27,9 +29,9 @@ export const colors = {
    */
   segmentDivider_color: palette.primary[700],
 
-  button_default_primary_border_normal: "transparent",
-  button_default_primary_border_hover: "transparent",
-  button_default_primary_border_active: "transparent",
+  button_default_primary_border_normal: 'transparent',
+  button_default_primary_border_hover: 'transparent',
+  button_default_primary_border_active: 'transparent',
   button_default_primary_background_normal: palette.primary[500],
   button_default_primary_background_hover: palette.primary[900],
   button_default_primary_background_active: palette.primary[900],
@@ -40,16 +42,16 @@ export const colors = {
   button_outlined_primary_border_normal: palette.primary[500],
   button_outlined_primary_border_hover: palette.primary[900],
   button_outlined_primary_border_active: palette.primary[900],
-  button_outlined_primary_background_normal: "transparent",
-  button_outlined_primary_background_hover: "transparent",
-  button_outlined_primary_background_active: "transparent",
+  button_outlined_primary_background_normal: 'transparent',
+  button_outlined_primary_background_hover: 'transparent',
+  button_outlined_primary_background_active: 'transparent',
   button_outlined_primary_text_normal: palette.primary[500],
   button_outlined_primary_text_hover: palette.primary[900],
   button_outlined_primary_text_active: palette.primary[900],
 
-  button_default_secondary_border_normal: "transparent",
-  button_default_secondary_border_hover: "transparent",
-  button_default_secondary_border_active: "transparent",
+  button_default_secondary_border_normal: 'transparent',
+  button_default_secondary_border_hover: 'transparent',
+  button_default_secondary_border_active: 'transparent',
   button_default_secondary_background_normal: palette.secondary[500],
   button_default_secondary_background_hover: palette.secondary[900],
   button_default_secondary_background_active: palette.secondary[900],
@@ -60,16 +62,16 @@ export const colors = {
   button_outlined_secondary_border_normal: palette.secondary[500],
   button_outlined_secondary_border_hover: palette.secondary[900],
   button_outlined_secondary_border_active: palette.secondary[900],
-  button_outlined_secondary_background_normal: "transparent",
-  button_outlined_secondary_background_hover: "transparent",
-  button_outlined_secondary_background_active: "transparent",
+  button_outlined_secondary_background_normal: 'transparent',
+  button_outlined_secondary_background_hover: 'transparent',
+  button_outlined_secondary_background_active: 'transparent',
   button_outlined_secondary_text_normal: palette.secondary[500],
   button_outlined_secondary_text_hover: palette.secondary[900],
   button_outlined_secondary_text_active: palette.secondary[900],
 
-  button_default_neutral_border_normal: "transparent",
-  button_default_neutral_border_hover: "transparent",
-  button_default_neutral_border_active: "transparent",
+  button_default_neutral_border_normal: 'transparent',
+  button_default_neutral_border_hover: 'transparent',
+  button_default_neutral_border_active: 'transparent',
   button_default_neutral_background_normal: palette.neutral[0],
   button_default_neutral_background_hover: palette.neutral[300],
   button_default_neutral_background_active: palette.neutral[900],
@@ -80,16 +82,16 @@ export const colors = {
   button_outlined_neutral_border_normal: palette.neutral[500],
   button_outlined_neutral_border_hover: palette.neutral[900],
   button_outlined_neutral_border_active: palette.neutral[900],
-  button_outlined_neutral_background_normal: "transparent",
-  button_outlined_neutral_background_hover: "transparent",
-  button_outlined_neutral_background_active: "transparent",
+  button_outlined_neutral_background_normal: 'transparent',
+  button_outlined_neutral_background_hover: 'transparent',
+  button_outlined_neutral_background_active: 'transparent',
   button_outlined_neutral_text_normal: palette.neutral[500],
   button_outlined_neutral_text_hover: palette.neutral[900],
   button_outlined_neutral_text_active: palette.neutral[900],
 
-  button_default_green_border_normal: "transparent",
-  button_default_green_border_hover: "transparent",
-  button_default_green_border_active: "transparent",
+  button_default_green_border_normal: 'transparent',
+  button_default_green_border_hover: 'transparent',
+  button_default_green_border_active: 'transparent',
   button_default_green_background_normal: palette.green[500],
   button_default_green_background_hover: palette.green[900],
   button_default_green_background_active: palette.green[900],
@@ -100,16 +102,16 @@ export const colors = {
   button_outlined_green_border_normal: palette.green[500],
   button_outlined_green_border_hover: palette.green[900],
   button_outlined_green_border_active: palette.green[900],
-  button_outlined_green_background_normal: "transparent",
-  button_outlined_green_background_hover: "transparent",
-  button_outlined_green_background_active: "transparent",
+  button_outlined_green_background_normal: 'transparent',
+  button_outlined_green_background_hover: 'transparent',
+  button_outlined_green_background_active: 'transparent',
   button_outlined_green_text_normal: palette.green[500],
   button_outlined_green_text_hover: palette.green[900],
   button_outlined_green_text_active: palette.green[900],
 
-  button_default_red_border_normal: "transparent",
-  button_default_red_border_hover: "transparent",
-  button_default_red_border_active: "transparent",
+  button_default_red_border_normal: 'transparent',
+  button_default_red_border_hover: 'transparent',
+  button_default_red_border_active: 'transparent',
   button_default_red_background_normal: palette.red[500],
   button_default_red_background_hover: palette.red[900],
   button_default_red_background_active: palette.red[900],
@@ -120,16 +122,16 @@ export const colors = {
   button_outlined_red_border_normal: palette.red[500],
   button_outlined_red_border_hover: palette.red[900],
   button_outlined_red_border_active: palette.red[900],
-  button_outlined_red_background_normal: "transparent",
-  button_outlined_red_background_hover: "transparent",
-  button_outlined_red_background_active: "transparent",
+  button_outlined_red_background_normal: 'transparent',
+  button_outlined_red_background_hover: 'transparent',
+  button_outlined_red_background_active: 'transparent',
   button_outlined_red_text_normal: palette.red[500],
   button_outlined_red_text_hover: palette.red[900],
   button_outlined_red_text_active: palette.red[900],
 
-  button_select_neutral_border_normal: "transparent",
-  button_select_neutral_border_hover: "transparent",
-  button_select_neutral_border_active: "transparent",
+  button_select_neutral_border_normal: 'transparent',
+  button_select_neutral_border_hover: 'transparent',
+  button_select_neutral_border_active: 'transparent',
   button_select_neutral_background_normal: palette.neutral[0],
   button_select_neutral_background_hover: palette.secondary[100],
   button_select_neutral_background_active: palette.secondary[300],
@@ -170,6 +172,9 @@ export const colors = {
   /**
    * Sliders
    */
-  slider_background: "#D8EDE9",
-  slider_text_area_background: "#BCE2DB",
-};
+  slider_background: '#D8EDE9',
+  slider_text_area_background: '#BCE2DB',
+} as const
+
+export type RadarSetKey = `chart_radar_set${number}_${'label' | 'fill' | 'outline'}`
+export type Colors = typeof colors & Record<RadarSetKey, string>

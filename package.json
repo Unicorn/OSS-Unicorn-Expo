@@ -1,13 +1,14 @@
 {
   "name": "expo-unicorn",
   "private": false,
-  "version": "1.4.0",
+  "version": "1.4.1",
   "license": "MIT",
   "author": "www.unicorn.love",
   "description": "Unicorn is a React Native UI library that allows you to quickly build beautiful interfaces.",
   "main": "./src/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@swc/core": "^1.10.1",

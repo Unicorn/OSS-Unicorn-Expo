@@ -1,62 +1,65 @@
-import { Text, TextStyle, Pressable, PressableProps, PressableStateCallbackType, ViewStyle } from "react-native";
+/** @format */
 
-import { ComponentProps, FC, Fragment, ReactNode } from "react";
+import { Text, TextStyle, Pressable, PressableProps, PressableStateCallbackType, ViewStyle } from 'react-native'
 
-import { MaterialIcons } from "@expo/vector-icons";
-import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from "@shopify/restyle";
+import { ComponentProps, FC, Fragment, ReactNode } from 'react'
 
-import { ChuzTheme, PressableState, SizeOptions } from "../../types";
-import { spacing, fontSizes } from "../../config";
-import { LoadingIcon } from "../Icons/LoadingIcon";
-import { withFeatures } from "../Base";
+import { MaterialIcons } from '@expo/vector-icons'
+import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
 
-const themeKey = "buttonVariants";
+import { ChuzTheme, PressableState, SizeOptions } from '../../types'
+import { spacing, fontSizes } from '../../config'
+import { LoadingIcon } from '../Icons/LoadingIcon'
+import { withFeatures } from '../Base'
 
-export type ButtonVariants = "defaults" | "outlined" | "select";
+const themeKey = 'buttonVariants'
 
-export type ButtonTypes = "primary" | "secondary" | "neutral" | "select" | "green" | "red";
+export type ButtonVariants = 'defaults' | 'outlined' | 'select'
+
+export type ButtonTypes = 'primary' | 'secondary' | 'neutral' | 'select' | 'green' | 'red'
 
 export const buttonVariants: Partial<BaseTheme> = {
   defaults: {
-    alignItems: "center",
+    alignItems: 'center',
     borderRadius: 5,
     borderWidth: 1,
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    gap: "xs",
-    justifyContent: "center",
-    width: "min-content",
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    gap: 'xs',
+    justifyContent: 'center',
+    width: 'min-content',
   },
   outlined: {},
   select: {
     borderRadius: 0,
-    justifyContent: "flex-start",
-    width: "100%",
+    justifyContent: 'flex-start',
+    width: '100%',
   },
-};
+}
 
-const Styled = createRestyleComponent<
-  VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Pressable>,
-  ChuzTheme
->([createVariant({ themeKey, defaults: buttonVariants.defaults })], Pressable);
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Pressable>, ChuzTheme>(
+  [createVariant({ themeKey, defaults: buttonVariants.defaults })],
+  Pressable
+)
 
 export interface ButtonProps extends Partial<PressableProps> {
-  variant?: ButtonVariants;
-  type?: ButtonTypes;
-  size?: SizeOptions;
-  active?: boolean;
-  loading?: boolean;
-  icon?: keyof typeof MaterialIcons.glyphMap;
-  label?: string;
-  showIcon?: boolean;
-  showLabel?: boolean;
-  style?: ViewStyle; // Explicitly only allow object-based styles because we manage state conditions internally
+  variant?: ButtonVariants
+  type?: ButtonTypes
+  size?: SizeOptions
+  active?: boolean
+  loading?: boolean
+  icon?: keyof typeof MaterialIcons.glyphMap
+  label?: string
+  showIcon?: boolean
+  showLabel?: boolean
+  style?: ViewStyle
+  value?: string | number
 }
 
 export const ButtonBase: FC<ButtonProps> = ({
   variant,
-  type = "neutral",
-  size,
+  type = 'neutral',
+  size = 'm',
   active,
   loading,
   icon,
@@ -67,103 +70,103 @@ export const ButtonBase: FC<ButtonProps> = ({
   style,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { colors } = useTheme()
 
-  const getColorForState = (t: "background" | "text" | "border", state: PressableState): string => {
-    const v = variant ?? "default";
+  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableState): string => {
+    const v = variant ?? 'default'
 
-    if (active) return colors[`button_${v}_${type}_${t}_active`];
-    if (state.hovered || state.pressed) return colors[`button_${v}_${type}_${t}_hover`];
+    if (active) return colors[`button_${v}_${type}_${t}_active`]
+    if (state.hovered || state.pressed) return colors[`button_${v}_${type}_${t}_hover`]
 
-    return colors[`button_${v}_${type}_${t}_normal`];
-  };
+    return colors[`button_${v}_${type}_${t}_normal`]
+  }
 
   const buttonStyle = (state: PressableState): ViewStyle => {
-    const sx: ViewStyle = (style ?? {}) as ViewStyle;
+    const sx: ViewStyle = (style ?? {}) as ViewStyle
     const s: ViewStyle = {
-      borderColor: getColorForState("border", state),
-      backgroundColor: getColorForState("background", state),
-    };
-
-    switch (size) {
-      case "xxs":
-        s["paddingHorizontal"] = spacing.xs;
-        s["paddingVertical"] = spacing.xxs;
-        break;
-      case "xs":
-        s["paddingHorizontal"] = spacing.s;
-        s["paddingVertical"] = spacing.xxs;
-        break;
-      case "s":
-        s["paddingHorizontal"] = spacing.m;
-        s["paddingVertical"] = spacing.xs;
-        break;
-      case "m":
-        s["paddingHorizontal"] = spacing.l;
-        s["paddingVertical"] = spacing.s;
-        break;
-      case "l":
-        s["paddingHorizontal"] = spacing.xl;
-        s["paddingVertical"] = spacing.s;
-        break;
-      case "xl":
-        s["paddingHorizontal"] = spacing.xl;
-        s["paddingVertical"] = spacing.s;
-        break;
-      case "xxl":
-        s["paddingHorizontal"] = spacing.xxl;
-        s["paddingVertical"] = spacing.s;
-        break;
-      default:
-        s["paddingHorizontal"] = spacing.m;
-        s["paddingVertical"] = spacing.xs;
-        break;
+      borderColor: getColorForState('border', state),
+      backgroundColor: getColorForState('background', state),
     }
 
-    s["shadowOffset"] = { width: 0, height: 2 };
-    s["shadowOpacity"] = 0.1;
-    s["shadowRadius"] = 2;
+    switch (size) {
+      case 'xxs':
+        s['paddingHorizontal'] = spacing.xs
+        s['paddingVertical'] = spacing.xxs
+        break
+      case 'xs':
+        s['paddingHorizontal'] = spacing.s
+        s['paddingVertical'] = spacing.xxs
+        break
+      case 's':
+        s['paddingHorizontal'] = spacing.m
+        s['paddingVertical'] = spacing.xs
+        break
+      case 'm':
+        s['paddingHorizontal'] = spacing.l
+        s['paddingVertical'] = spacing.s
+        break
+      case 'l':
+        s['paddingHorizontal'] = spacing.xl
+        s['paddingVertical'] = spacing.s
+        break
+      case 'xl':
+        s['paddingHorizontal'] = spacing.xl
+        s['paddingVertical'] = spacing.s
+        break
+      case 'xxl':
+        s['paddingHorizontal'] = spacing.xxl
+        s['paddingVertical'] = spacing.s
+        break
+      default:
+        s['paddingHorizontal'] = spacing.m
+        s['paddingVertical'] = spacing.xs
+        break
+    }
 
-    return { ...s, ...sx };
-  };
+    s['shadowOffset'] = { width: 0, height: 2 }
+    s['shadowOpacity'] = 0.1
+    s['shadowRadius'] = 2
+
+    return { ...s, ...sx }
+  }
 
   const buildTextStyle = (state: PressableStateCallbackType): TextStyle => {
-    const s: TextStyle = { color: getColorForState("text", state) };
+    const s: TextStyle = { color: getColorForState('text', state) }
 
-    s["fontSize"] = fontSizes[size];
+    s['fontSize'] = fontSizes[size]
 
-    return s;
-  };
+    return s
+  }
 
   const renderLabel = (state: PressableState): ReactNode | null => {
-    if (!showLabel) return null;
+    if (!showLabel) return null
 
-    if (label || typeof children === "string")
+    if (label || typeof children === 'string')
       return (
         <Text numberOfLines={1} style={buildTextStyle(state)}>
           {label ?? children?.toString()}
         </Text>
-      );
+      )
 
-    return children as ReactNode;
-  };
+    return children as ReactNode
+  }
 
   return (
     <Styled
       {...props}
       variant={variant}
       style={buttonStyle}
-      children={(state) => {
+      children={state => {
         return (
           <Fragment>
             {loading && <LoadingIcon style={buildTextStyle(state)} />}
             {icon && showIcon && <MaterialIcons name={icon} style={buildTextStyle(state)} size={spacing[size] ?? 18} />}
             {renderLabel(state)}
           </Fragment>
-        );
+        )
       }}
     ></Styled>
-  );
-};
+  )
+}
 
-export const Button = withFeatures(ButtonBase);
+export const Button = withFeatures(ButtonBase)

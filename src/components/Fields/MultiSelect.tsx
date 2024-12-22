@@ -40,7 +40,15 @@ interface Props extends FeatureProps {
   onChange?: (options: SelectOption[]) => void
 }
 
-export const MultiSelectBase: FC<Props> = ({ label, style, options = stubbedOptions, selected, onSelect, onChange, ...props }) => {
+export const MultiSelectBase: FC<Props> = ({
+  label,
+  style = { borderRadius: 0 },
+  options = stubbedOptions,
+  selected,
+  onSelect,
+  onChange,
+  ...props
+}) => {
   const { colors } = useTheme()
   const [opened, setOpened] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>(selected ?? options ?? [])
@@ -93,7 +101,7 @@ export const MultiSelectBase: FC<Props> = ({ label, style, options = stubbedOpti
               },
             ]}
           >
-            <ScrollView style={{ borderRadius: style['borderRadius'] }}>
+            <ScrollView style={{ borderRadius: style.borderRadius }}>
               {options.map(item => (
                 <Button
                   key={randomUUID()}
