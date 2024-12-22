@@ -69,7 +69,7 @@ export interface PressableButtonProps extends Omit<PressableProps, 'children' | 
   style?: StyleProp<ViewStyle> | ((state: PressableState) => StyleProp<ViewStyle>) | undefined
 }
 
-export const PressableButton: React.ForwardRefExoticComponent<PressableButtonProps & React.RefAttributes<View>>
+export declare const PressableButton: React.ForwardRefExoticComponent<PressableButtonProps & React.RefAttributes<View>>
 
 export type ChuzTheme =
   | ({
