@@ -5,7 +5,7 @@ import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, Text,
 import { ComponentProps, FC, Fragment, ReactNode } from 'react'
 
 import { MaterialIcons } from '@expo/vector-icons'
-import { VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
+import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
 
 import { ChuzTheme, SizeOptions } from '../../types'
 import { spacing, fontSizes } from '../../config'
@@ -18,7 +18,7 @@ export type ButtonVariants = 'defaults' | 'outlined' | 'select'
 
 export type ButtonTypes = 'primary' | 'secondary' | 'neutral' | 'select' | 'green' | 'red'
 
-export const buttonVariants: Record<ButtonVariants, ViewStyle> = {
+export const buttonVariants: Partial<BaseTheme> = {
   defaults: {
     alignItems: 'center',
     borderRadius: 5,
@@ -168,4 +168,4 @@ export const ButtonBase: FC<ButtonProps> = ({
   )
 }
 
-export const Scrap = withFeatures(ButtonBase)
+export const Button = withFeatures(ButtonBase)

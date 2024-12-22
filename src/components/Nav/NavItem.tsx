@@ -5,7 +5,8 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 import { NavIcon } from './NavIcon'
 import { NavText } from './NavText'
-import { ChuzTheme, PressableButton, PressableButtonProps, PressableState } from '../../types'
+import { ChuzTheme } from '../../types'
+import { Pressable, PressableProps, PressableStateCallbackType } from 'react-native'
 
 const themeKey = 'navItemVariants'
 
@@ -17,12 +18,12 @@ export const navItemVariants: Partial<BaseTheme> = {
   },
 }
 
-const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof PressableButton>, ChuzTheme>(
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Pressable>, ChuzTheme>(
   [createVariant({ themeKey, defaults: navItemVariants.defaults })],
-  PressableButton
+  Pressable
 )
 
-interface Props extends PressableButtonProps {
+interface Props extends PressableProps {
   active?: boolean
   label: string
   icon?: keyof typeof MaterialIcons.glyphMap
@@ -31,11 +32,11 @@ interface Props extends PressableButtonProps {
 }
 
 export const NavItem: FC<Props> = ({ active, icon, label, showIcon, showLabel, ...props }) => {
-  const renderChildren = ({ pressed, hovered }: PressableState) => {
+  const renderChildren = ({ pressed }: PressableStateCallbackType) => {
     return (
       <Fragment>
-        {showIcon && icon && <NavIcon name={icon} variant={active ? 'active' : hovered ? 'hovered' : 'defaults'} />}
-        {showLabel && <NavText label={label} variant={active ? 'active' : hovered ? 'hovered' : 'defaults'} />}
+        {showIcon && icon && <NavIcon name={icon} variant={active ? 'active' : pressed ? 'hovered' : 'defaults'} />}
+        {showLabel && <NavText label={label} variant={active ? 'active' : pressed ? 'hovered' : 'defaults'} />}
       </Fragment>
     )
   }
