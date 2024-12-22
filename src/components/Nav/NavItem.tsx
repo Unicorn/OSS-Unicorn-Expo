@@ -1,12 +1,12 @@
 /** @format */
 
-import { Pressable, PressableProps } from 'react-native'
+import { Pressable, PressableProps, PressableStateCallbackType } from 'react-native'
 import { ComponentProps, FC, Fragment } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 import { NavIcon } from './NavIcon'
 import { NavText } from './NavText'
-import { ChuzTheme, PressableState } from '../../types'
+import { ChuzTheme } from '../../types'
 
 const themeKey = 'navItemVariants'
 
@@ -32,7 +32,7 @@ interface Props extends PressableProps {
 }
 
 export const NavItem: FC<Props> = ({ active, icon, label, showIcon, showLabel, ...props }) => {
-  const renderChildren = ({ pressed, hovered }: PressableState) => {
+  const renderChildren = ({ pressed, hovered }: PressableStateCallbackType) => {
     return (
       <Fragment>
         {showIcon && icon && <NavIcon name={icon} variant={active ? 'active' : hovered ? 'hovered' : 'defaults'} />}

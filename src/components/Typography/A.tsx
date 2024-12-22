@@ -1,58 +1,60 @@
-import { Linking } from "react-native";
+/** @format */
 
-import { ComponentProps, FC, useState, ReactNode } from "react";
+import { Linking } from 'react-native'
 
-import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from "@shopify/restyle";
-import { Link } from "expo-router";
-import { LinkProps } from "expo-router/build/link/Link";
+import { ComponentProps, FC, useState, ReactNode } from 'react'
 
-import { ChuzTheme } from "../../types";
+import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
+import { Href, Link } from 'expo-router'
+import { LinkProps } from 'expo-router/build/link/Link'
 
-const themeKey = "aVariants";
+import { ChuzTheme } from '../../types'
+
+const themeKey = 'aVariants'
 
 export const aVariants: Partial<BaseTheme> = {
   defaults: {
-    color: "link_color",
-    position: "relative",
+    color: 'link_color',
+    position: 'relative',
     zIndex: 10,
   },
   hovered: {
-    color: "link_hover",
+    color: 'link_hover',
   },
-};
+}
 
-const Styled = createRestyleComponent<
-  VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Link>,
-  ChuzTheme
->([createVariant({ themeKey, defaults: aVariants.defaults })], Link);
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Link>, ChuzTheme>(
+  [createVariant({ themeKey, defaults: aVariants.defaults })],
+  Link
+)
 
 interface Props extends LinkProps {
-  variant?: "defaults" | "hovered";
-  href: string;
+  variant?: 'defaults' | 'hovered'
+  href: Href
 }
 
 export const A: FC<Props> = ({ children, href, ...props }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
 
-  const hoverHandler = () => setIsHovered(true);
-  const leaveHandler = () => setIsHovered(false);
+  const hoverHandler = () => setIsHovered(true)
+  const leaveHandler = () => setIsHovered(false)
 
   const handlePress = () => {
-    Linking.canOpenURL(href)
-      .then((supported) => {
+    Linking.canOpenURL(href as string)
+      .then(supported => {
         if (supported) {
-          Linking.openURL(href);
+          Linking.openURL(href as string)
         } else {
-          console.error("Don't know how to open this URL: " + href);
+          console.error("Don't know how to open this URL: " + href)
         }
       })
-      .catch((err) => console.error("An error occurred", err));
-  };
+      .catch(err => console.error('An error occurred', err))
+  }
 
   return (
     <Styled
       href={href}
-      variant={isHovered ? "hovered" : "defaults"}
+      variant={isHovered ? 'hovered' : 'defaults'}
       onPressIn={hoverHandler}
       onPressOut={leaveHandler}
       onPress={handlePress}
@@ -60,5 +62,5 @@ export const A: FC<Props> = ({ children, href, ...props }) => {
     >
       {children as ReactNode}
     </Styled>
-  );
-};
+  )
+}

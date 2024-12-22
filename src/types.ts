@@ -1,6 +1,6 @@
 /** @format */
 
-import { PressableStateCallbackType, ViewStyle } from 'react-native'
+import { ViewStyle } from 'react-native'
 
 import { ReactNode } from 'react'
 
@@ -55,12 +55,6 @@ export interface RadarChartSetup {
   angleDeg: number
   max: number
   size: number
-}
-
-// Adding in because even though hovered state exists in RN, it's not typed properly
-export interface PressableState extends PressableStateCallbackType {
-  pressed: boolean
-  hovered?: boolean
 }
 
 export type ChuzTheme =

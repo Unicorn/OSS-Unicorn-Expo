@@ -7,7 +7,7 @@ import { ComponentProps, FC, Fragment, ReactNode } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
 
-import { ChuzTheme, PressableState, SizeOptions } from '../../types'
+import { ChuzTheme, SizeOptions } from '../../types'
 import { spacing, fontSizes } from '../../config'
 import { LoadingIcon } from '../Icons/LoadingIcon'
 import { withFeatures } from '../Base'
@@ -72,7 +72,7 @@ export const ButtonBase: FC<ButtonProps> = ({
 }) => {
   const { colors } = useTheme()
 
-  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableState): string => {
+  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableStateCallbackType): string => {
     const v = variant ?? 'default'
 
     if (active) return colors[`button_${v}_${type}_${t}_active`]
@@ -81,7 +81,7 @@ export const ButtonBase: FC<ButtonProps> = ({
     return colors[`button_${v}_${type}_${t}_normal`]
   }
 
-  const buttonStyle = (state: PressableState): ViewStyle => {
+  const buttonStyle = (state: PressableStateCallbackType): ViewStyle => {
     const sx: ViewStyle = (style ?? {}) as ViewStyle
     const s: ViewStyle = {
       borderColor: getColorForState('border', state),
@@ -138,7 +138,7 @@ export const ButtonBase: FC<ButtonProps> = ({
     return s
   }
 
-  const renderLabel = (state: PressableState): ReactNode | null => {
+  const renderLabel = (state: PressableStateCallbackType): ReactNode | null => {
     if (!showLabel) return null
 
     if (label || typeof children === 'string')
@@ -159,7 +159,7 @@ export const ButtonBase: FC<ButtonProps> = ({
       children={state => {
         return (
           <Fragment>
-            {loading && <LoadingIcon style={buildTextStyle(state)} />}
+            {loading && <LoadingIcon style={{ marginRight: spacing[size] ?? 18 }} />}
             {icon && showIcon && <MaterialIcons name={icon} style={buildTextStyle(state)} size={spacing[size] ?? 18} />}
             {renderLabel(state)}
           </Fragment>
