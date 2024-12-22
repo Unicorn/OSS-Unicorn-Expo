@@ -42,7 +42,9 @@ function processStyles(styles: ResponsiveStyle, width: number): ResponsiveStyle 
     } else if (typeof value === 'object' && value !== null) {
       processedStyles[key] = processStyles(value as ResponsiveStyle, width) // Recursive call
     } else {
-      processedStyles[key] = value
+      if (value !== undefined) {
+        processedStyles[key] = value
+      }
     }
   })
   return processedStyles

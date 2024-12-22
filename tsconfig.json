@@ -3,8 +3,24 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+
     "jsx": "react-native",
-    "strict": true
+
+    /** Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "checkJs": true,
+
+    /** Transpile using Bundler (not tsc) */
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
+    "noEmit": true
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]

@@ -1,9 +1,8 @@
 /** @format */
 
-import { createRestyleComponent, VariantProps, createVariant, BaseTheme, backgroundColor, useTheme } from '@shopify/restyle'
+import { createRestyleComponent, VariantProps, createVariant, BaseTheme, useTheme } from '@shopify/restyle'
 import { useState, useRef, FC, ComponentProps, ReactNode, useEffect } from 'react'
-import { Platform, View, StyleSheet, ScrollView, Animated, Pressable } from 'react-native'
-import { randomUUID } from 'expo-crypto'
+import { View, StyleSheet, ScrollView, Animated, Pressable } from 'react-native'
 
 import { ChuzTheme, SelectOption } from '../../types'
 import { Button } from '../../components/Button'
@@ -88,7 +87,7 @@ export const SelectBase: FC<Props> = ({
     const C = labelType === 'plain' ? Pressable : Button
     return (
       <C onPress={toggleDropdown} active={opened}>
-        {label ? label : selected ? _selected.label : selectedOption.label}
+        {label ? label : selected ? (_selected?.label ?? selectedOption?.label ?? '') : (selectedOption?.label ?? '')}
       </C>
     )
   }

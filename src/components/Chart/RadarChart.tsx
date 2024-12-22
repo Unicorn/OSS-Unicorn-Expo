@@ -73,6 +73,10 @@ export const RadarChart: FC<Props> = ({
 }) => {
   const { colors } = useTheme<ChuzTheme>()
 
+  if (!sets || sets.length === 0 || sets[0] === undefined) {
+    return null
+  }
+
   if (sets && showSets.some(index => index >= sets.length)) {
     console.error('Invalid index in showSets. Ensure indices are within the bounds of the sets array.')
     return (
@@ -156,19 +160,22 @@ export const RadarChart: FC<Props> = ({
 
           {renderAxis(sets[0].data)}
 
-          {showSets.map(s => (
-            <RadarPolygon
-              key={randomUUID()}
-              dimensions={calculated}
-              fill={colors[`chart_radar_set${s + 1}_fill`]}
-              stroke={colors[`chart_radar_set${s + 1}_outline`]}
-              data={sets[s].data}
-            />
-          ))}
+          {showSets.map(
+            s =>
+              sets[s] && (
+                <RadarPolygon
+                  key={randomUUID()}
+                  dimensions={calculated}
+                  fill={colors[`chart_radar_set${s + 1}_fill`] as string}
+                  stroke={colors[`chart_radar_set${s + 1}_outline`] as string}
+                  data={sets[s].data}
+                />
+              )
+          )}
         </Svg>
       </View>
 
-      {showSets.map((s, i) => renderLabels(sets[s].data, s, i))}
+      {showSets.map((s, i) => sets[s] && renderLabels(sets[s].data, s, i))}
     </View>
   )
 }

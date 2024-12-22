@@ -1,7 +1,6 @@
 /** @format */
 
 import type { TOptionsBase } from 'i18next'
-import { $Dictionary } from 'i18next/typescript/helpers'
 import { useTranslation, Trans } from 'react-i18next'
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { useSegments } from 'expo-router'
@@ -10,6 +9,7 @@ import { STORE, getItem, setItem } from '../store/store'
 import { getLocales } from 'expo-localization'
 import i18next from 'i18next'
 
+type $Dictionary<T = unknown> = { [key: string]: T }
 type TranslationOptions = TOptionsBase & $Dictionary
 
 interface LocaleTranslateProps {
@@ -69,7 +69,8 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       if (storedLocale) {
         setLocale(storedLocale as string)
       } else {
-        const locale = getLocales()?.[0].languageTag
+        const locales = getLocales()
+        const locale = locales[0]?.languageTag ?? 'en' ?? 'en'
         setLocale(locale)
       }
     }
