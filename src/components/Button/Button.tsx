@@ -7,7 +7,7 @@ import { ComponentProps, FC, Fragment, ReactNode } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
 
-import { ChuzTheme, SizeOptions } from '../../types'
+import { ChuzTheme, PressableState, SizeOptions } from '../../types'
 import { spacing, fontSizes } from '../../config'
 import { LoadingIcon } from '../Icons/LoadingIcon'
 import { withFeatures } from '../Base'
@@ -72,7 +72,7 @@ export const ButtonBase: FC<ButtonProps> = ({
 }) => {
   const { colors } = useTheme()
 
-  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableStateCallbackType): string => {
+  const getColorForState = (t: 'background' | 'text' | 'border', state: PressableState): string => {
     const v = variant ?? 'default'
 
     if (active) return colors[`button_${v}_${type}_${t}_active`]

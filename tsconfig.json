@@ -22,7 +22,7 @@
     "moduleResolution": "Bundler",
     "noEmit": true,
 
-    "types": ["expo", "react-native", "react-native-web"]
+    "types": ["expo", "react-native"]
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]

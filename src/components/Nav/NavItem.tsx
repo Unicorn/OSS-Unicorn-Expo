@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 import { NavIcon } from './NavIcon'
 import { NavText } from './NavText'
-import { ChuzTheme } from '../../types'
+import { ChuzTheme, PressableState } from '../../types'
 
 const themeKey = 'navItemVariants'
 
@@ -32,7 +32,7 @@ interface Props extends PressableProps {
 }
 
 export const NavItem: FC<Props> = ({ active, icon, label, showIcon, showLabel, ...props }) => {
-  const renderChildren = ({ pressed, hovered }: PressableStateCallbackType) => {
+  const renderChildren = ({ pressed, hovered }: PressableState) => {
     return (
       <Fragment>
         {showIcon && icon && <NavIcon name={icon} variant={active ? 'active' : hovered ? 'hovered' : 'defaults'} />}
