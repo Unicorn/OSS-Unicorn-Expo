@@ -8,6 +8,7 @@ import { useSegments } from 'expo-router'
 import { STORE, getItem, setItem } from '../store/store'
 import { getLocales } from 'expo-localization'
 import i18next from 'i18next'
+import { useChuzContext } from '../store'
 
 type $Dictionary<T = unknown> = { [key: string]: T }
 type TranslationOptions = TOptionsBase & $Dictionary
@@ -17,20 +18,20 @@ interface LocaleTranslateProps {
   endpoint?: string
 }
 
-interface LocaleContextType {
-  locale: string | null
-  setLocale: (locale: string) => void
-}
+// interface LocaleContextType {
+//   locale: string | null
+//   setLocale: (locale: string) => void
+// }
 
-const LocaleContext = createContext<LocaleContextType>({ locale: null } as LocaleContextType)
+// const LocaleContext = createContext<LocaleContextType>({ locale: null } as LocaleContextType)
 
-export function useLocale() {
-  const context = useContext(LocaleContext)
-  if (context === undefined) {
-    throw new Error('useLocale must be used within an LocaleProvider')
-  }
-  return context
-}
+// export function useLocale() {
+//   const context = useContext(LocaleContext)
+//   if (context === undefined) {
+//     throw new Error('useLocale must be used within an LocaleProvider')
+//   }
+//   return context
+// }
 
 // Utility to construct locale keys for routes
 export function makeLocaleRouteKey(segments: string[], endpoint: string): string {
@@ -47,44 +48,44 @@ export function useRoutesLocale(): (endpoint: string, options?: TranslationOptio
 
 export function LocaleTranslate({ endpoint, children }: LocaleTranslateProps) {
   const segments = useSegments()
-  const { locale } = useLocale()
+  const { locale } = useChuzContext()
   const key = endpoint ? makeLocaleRouteKey(segments, endpoint) : ''
 
   return <Trans i18nKey={key}>{locale === 'dev' ? key : children}</Trans>
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<string | null>(null)
+// export function LocaleProvider({ children }: { children: ReactNode }) {
+//   const [locale, setLocale] = useState<string | null>(null)
 
-  const updateLocale = async (locale: string) => {
-    await setItem(STORE.locale, locale)
-    i18next.changeLanguage(locale)
-    setLocale(locale)
-  }
+//   const updateLocale = async (locale: string) => {
+//     await setItem(STORE.locale, locale)
+//     i18next.changeLanguage(locale)
+//     setLocale(locale)
+//   }
 
-  useEffect(() => {
-    if (locale) return
-    const loadLocales = async () => {
-      const storedLocale = await getItem(STORE.locale)
-      if (storedLocale) {
-        setLocale(storedLocale as string)
-      } else {
-        const locales = getLocales()
-        const locale = locales[0]?.languageTag ?? 'en' ?? 'en'
-        setLocale(locale)
-      }
-    }
-    loadLocales()
-  }, [locale])
+//   useEffect(() => {
+//     if (locale) return
+//     const loadLocales = async () => {
+//       const storedLocale = await getItem<string>(STORE.locale)
+//       if (storedLocale) {
+//         setLocale(storedLocale)
+//       } else {
+//         const locales = getLocales()
+//         const locale = locales[0]?.languageTag ?? 'en' ?? 'en'
+//         setLocale(locale)
+//       }
+//     }
+//     loadLocales()
+//   }, [locale])
 
-  return (
-    <LocaleContext.Provider
-      value={{
-        setLocale: async (locale: string) => await updateLocale(locale),
-        locale,
-      }}
-    >
-      {children}
-    </LocaleContext.Provider>
-  )
-}
+//   return (
+//     <LocaleContext.Provider
+//       value={{
+//         setLocale: async (locale: string) => await updateLocale(locale),
+//         locale,
+//       }}
+//     >
+//       {children}
+//     </LocaleContext.Provider>
+//   )
+// }

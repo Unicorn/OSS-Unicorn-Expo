@@ -9,13 +9,26 @@ import { colors } from './config/colors'
 import { fontSizes } from './config/fonts'
 import { ButtonTypes } from './components'
 
+export type NestedTranslation = {
+  [key: string]: string | NestedTranslation
+}
+
+export type Translation = {
+  en: NestedTranslation
+  es: NestedTranslation
+  dev: NestedTranslation
+}
+
 export interface ChuzContextType {
   theme: ChuzThemes
+  locale: string | null
   setTheme: (theme: ChuzThemes) => void
+  setLocale: (locale: string) => void
 }
 
 export interface ChuzProviderProps {
   children: ReactNode
+  translations: Translation
 }
 
 export type BreakpointOptions = 'mobile' | 'tablet' | 'desktop'

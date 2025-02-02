@@ -32,9 +32,10 @@ interface Props extends ViewProps {
   handler: (v: number) => void
   step?: number
   disabled?: boolean
+  measurement?: '%'
 }
 
-export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, step = 10, disabled = false, ...props }) => {
+export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, step = 10, disabled = false, measurement }) => {
   // Note: we may consider moving 'value' out of the component
   // if it makes sense to have it managed by the parent component (ie: controlled component)
   const [isPanning, setIsPanning] = useState(false)
@@ -97,7 +98,10 @@ export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, s
     <View ref={sliderRef} {...panResponder.panHandlers}>
       <View style={styles.meta}>
         {label && renderLabel()}
-        <Text>{value.toFixed(0)}%</Text>
+        <Text>
+          {value.toFixed(0)}
+          {measurement}
+        </Text>
       </View>
       <Styled>
         <View style={[styles.fill, { width: `${value}%`, backgroundColor: `hsl(171, ${50 + 0.3 * value}%, ${30 + 0.1 * value}%)` }]} />

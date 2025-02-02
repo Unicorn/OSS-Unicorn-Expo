@@ -1,6 +1,6 @@
 /** @format */
 
-import type { StyleSheet } from 'react-native'
+import type { StyleProp, StyleSheet } from 'react-native'
 import { Platform } from 'react-native'
 import { useTheme } from '@shopify/restyle'
 
@@ -52,8 +52,10 @@ const replaceColors = (styles: ReStyled, colors: any): ReStyled => {
   return newStyles
 }
 
-export const useStyles = (styles: ReStyled): ReStyled => {
+export function useStyles<T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>>(
+  styles: ReStyled
+): T & StyleSheet.NamedStyles<any> {
   const { colors } = useTheme()
   injectScrollbarStyles()
-  return replaceColors(styles, colors)
+  return replaceColors(styles, colors) as T
 }
