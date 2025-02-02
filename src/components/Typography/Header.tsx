@@ -22,8 +22,7 @@ export const headerVariants: Partial<BaseTheme> = {
       desktop: 32,
     },
     fontWeight: 'normal',
-    paddingBottom: 'xs',
-    paddingTop: 's',
+    paddingVertical: 's',
   },
   h3: {
     fontSize: {
@@ -32,8 +31,7 @@ export const headerVariants: Partial<BaseTheme> = {
       desktop: 20,
     },
     fontWeight: 'normal',
-    paddingBottom: 'xs',
-    paddingTop: 's',
+    paddingVertical: 'xs',
   },
 }
 

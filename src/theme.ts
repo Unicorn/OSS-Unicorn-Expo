@@ -1,10 +1,13 @@
-import { createTheme } from "@shopify/restyle";
+/** @format */
 
-import { colors, palette, breakpoints, spacing } from "./config";
+import { createTheme } from '@shopify/restyle'
+
+import { colors, palette, breakpoints, spacing } from './config'
 import {
   blockImageVariants,
   buttonVariants,
   buttonGroupVariants,
+  cardVariants,
   contentVariants,
   dividerVariants,
   multiSelectVariants,
@@ -25,7 +28,7 @@ import {
   headerVariants,
   titleVariants,
   columnsVariants,
-} from "./components";
+} from './components'
 
 export const theme = {
   breakpoints,
@@ -34,6 +37,7 @@ export const theme = {
   blockImageVariants,
   buttonVariants,
   buttonGroupVariants,
+  cardVariants,
   contentVariants,
   dividerVariants,
   selectVariants,
@@ -54,12 +58,12 @@ export const theme = {
   headerVariants,
   titleVariants,
   columnsVariants,
-};
+}
 
 export const chuzUILight = createTheme({
   ...theme,
   colors,
-});
+})
 
 export const chuzUIDark = createTheme({
   ...theme,
@@ -171,4 +175,4 @@ export const chuzUIDark = createTheme({
     chart_radar_set2_label: palette.secondary[500],
     chart_radar_set3_label: palette.green[500],
   },
-});
+})
