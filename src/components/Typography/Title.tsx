@@ -21,12 +21,12 @@ export const titleVariants: Partial<BaseTheme> = {
       desktop: 36,
     },
     fontWeight: 'bold',
-    paddingBottom: spacing.xs,
+    paddingBottom: 'xs',
   },
   subtitle: {
     fontSize: 18,
-    paddingBottom: spacing.xs,
-    paddingTop: spacing.s,
+    paddingBottom: 'xs',
+    paddingTop: 's',
   },
 }
 

@@ -7,7 +7,7 @@ import { ComponentProps, FC } from 'react'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
 import { ChuzTheme } from '../../types'
-import { spacing } from '../../config/size'
+import { spacing } from '../../config'
 
 const themeKey = 'headerVariants'
 
@@ -22,8 +22,8 @@ export const headerVariants: Partial<BaseTheme> = {
       desktop: 32,
     },
     fontWeight: 'normal',
-    paddingBottom: spacing.xs,
-    paddingTop: spacing.s,
+    paddingBottom: 'xs',
+    paddingTop: 's',
   },
   h3: {
     fontSize: {
@@ -32,8 +32,8 @@ export const headerVariants: Partial<BaseTheme> = {
       desktop: 20,
     },
     fontWeight: 'normal',
-    paddingBottom: spacing.xs,
-    paddingTop: spacing.s,
+    paddingBottom: 'xs',
+    paddingTop: 's',
   },
 }
 
