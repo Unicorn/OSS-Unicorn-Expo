@@ -1,6 +1,6 @@
 /** @format */
 
-import { createContext, FC, useState, useContext, useEffect } from 'react'
+import { createContext, FC, useState, useContext, useEffect, useMemo } from 'react'
 
 import { ThemeProvider } from '@shopify/restyle'
 import i18n from 'i18next'
@@ -22,65 +22,45 @@ export const ChuzContext = createContext<ChuzContextType>({
 export const ChuzProvider: FC<ChuzProviderProps> = ({ children, translations }) => {
   const [theme, setTheme] = useState<ChuzThemes>('light')
   const [locale, setLocale] = useState<string>('dev')
-
-  let restyle: ChuzTheme
+  const restyle = useMemo(() => (theme === 'dark' ? chuzUIDark : chuzUILight), [theme])
 
   const setThemeHandler = (t: ChuzThemes) => {
-    setItem(STORE.theme, t)
-    setTheme(t)
+    setItem(STORE.theme, t).then(() => setTheme(t))
   }
 
   const setLocaleHandler = async (locale: string) => {
-    setItem(STORE.locale, locale)
-    i18next.changeLanguage(locale)
-    setLocale(locale)
+    setItem(STORE.locale, locale).then(() => {
+      i18next.changeLanguage(locale)
+      setLocale(locale)
+    })
   }
 
   useEffect(() => {
-    const getThemeFromStore = async () => {
-      const t = await getItem<ChuzThemes | null>(STORE.theme)
-      t && setThemeHandler(t)
-    }
+    const loadSettings = async () => {
+      const [storedTheme, storedLocale] = await Promise.all([getItem<ChuzThemes | null>(STORE.theme), getItem<string>(STORE.locale)])
 
-    const getLocaleFromStore = async () => {
-      const storedLocale = await getItem<string>(STORE.locale)
+      if (storedTheme) setTheme(storedTheme)
       if (storedLocale) {
         setLocale(storedLocale)
       } else {
         const locales = getLocales()
-        const locale = (locales[0]?.languageTag ?? 'dev' ?? 'dev') as string
-        setLocale(locale)
+        setLocale(locales[0]?.languageTag ?? 'dev')
       }
     }
 
-    getLocaleFromStore()
-    getThemeFromStore()
+    loadSettings()
   }, [])
 
   useEffect(() => {
-    ;(async () => {
-      await i18n.use(initReactI18next).init({
+    i18n
+      .use(initReactI18next)
+      .init({
         resources: translations,
         lng: locale,
-        interpolation: {
-          // React escapes by default
-          escapeValue: false,
-        },
+        interpolation: { escapeValue: false },
       })
-    })().catch(console.error)
-  }, [locale])
-
-  switch (theme) {
-    case 'light':
-      restyle = chuzUILight
-      break
-    case 'dark':
-      restyle = chuzUIDark
-      break
-    default:
-      restyle = chuzUILight
-      break
-  }
+      .catch(console.error)
+  }, [locale, translations])
 
   return (
     <ChuzContext.Provider value={{ theme, locale, setTheme: setThemeHandler, setLocale: setLocaleHandler }}>

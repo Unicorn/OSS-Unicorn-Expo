@@ -1,7 +1,7 @@
 {
   "name": "expo-unicorn",
   "private": false,
-  "version": "1.7.1",
+  "version": "1.7.2",
   "license": "MIT",
   "author": "www.unicorn.love",
   "description": "Unicorn is a React Native UI library that allows you to quickly build beautiful interfaces.",
