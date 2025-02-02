@@ -1,25 +1,29 @@
-import { Text, TextProps } from "react-native";
+/** @format */
 
-import { ComponentProps, FC } from "react";
+import { Text, TextProps } from 'react-native'
 
-import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from "@shopify/restyle";
+import { ComponentProps, FC } from 'react'
 
-import { ChuzTheme } from "../../types";
+import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
-const themeKey = "headerVariants";
+import { ChuzTheme } from '../../types'
+import { spacing } from '../../config/size'
+
+const themeKey = 'headerVariants'
 
 export const headerVariants: Partial<BaseTheme> = {
   defaults: {
-    color: "text_color",
+    color: 'text_color',
   },
   h2: {
     fontSize: {
-      mobile: 28,
-      tablet: 32,
-      desktop: 36,
+      mobile: 24,
+      tablet: 28,
+      desktop: 32,
     },
-    fontWeight: "normal",
-    paddingVertical: "m",
+    fontWeight: 'normal',
+    paddingBottom: spacing.xs,
+    paddingTop: spacing.s,
   },
   h3: {
     fontSize: {
@@ -27,19 +31,21 @@ export const headerVariants: Partial<BaseTheme> = {
       tablet: 18,
       desktop: 20,
     },
-    fontWeight: "normal",
+    fontWeight: 'normal',
+    paddingBottom: spacing.xs,
+    paddingTop: spacing.s,
   },
-};
+}
 
-const Styled = createRestyleComponent<
-  VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>,
-  ChuzTheme
->([createVariant({ themeKey, defaults: headerVariants.defaults })], Text);
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>, ChuzTheme>(
+  [createVariant({ themeKey, defaults: headerVariants.defaults })],
+  Text
+)
 
 interface Props extends TextProps {
-  variant?: "defaults" | "h2" | "h3";
+  variant?: 'defaults' | 'h2' | 'h3'
 }
 
 export const Header: FC<Props> = ({ children, ...props }) => {
-  return <Styled {...props}>{children}</Styled>;
-};
+  return <Styled {...props}>{children}</Styled>
+}

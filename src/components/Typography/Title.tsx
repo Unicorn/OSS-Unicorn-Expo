@@ -1,53 +1,57 @@
-import { Text, TextProps } from "react-native";
+/** @format */
 
-import { ComponentProps, FC } from "react";
+import { Text, TextProps } from 'react-native'
 
-import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from "@shopify/restyle";
+import { ComponentProps, FC } from 'react'
 
-import { ChuzTheme } from "../../types";
-import { fonts } from "../../config";
+import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
-const themeKey = "titleVariants";
+import { ChuzTheme } from '../../types'
+import { fonts, spacing } from '../../config'
+
+const themeKey = 'titleVariants'
 
 export const titleVariants: Partial<BaseTheme> = {
   defaults: {
-    color: "text_color",
+    color: 'text_color',
     fontFamily: fonts.body,
     fontSize: {
-      mobile: 32,
-      tablet: 36,
-      desktop: 40,
+      mobile: 28,
+      tablet: 32,
+      desktop: 36,
     },
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    paddingBottom: spacing.xs,
   },
   subtitle: {
     fontSize: 18,
-    paddingVertical: 0,
+    paddingBottom: spacing.xs,
+    paddingTop: spacing.s,
   },
-};
-
-const StyledH1 = createRestyleComponent<
-  VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>,
-  ChuzTheme
->([createVariant({ themeKey, defaults: titleVariants.defaults })], Text);
-
-const StyledText = createRestyleComponent<
-  VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>,
-  ChuzTheme
->([createVariant({ themeKey, defaults: titleVariants.defaults })], Text);
-
-interface Props extends TextProps {
-  variant?: "defaults" | "subtitle" | "hidden";
 }
 
-export const Title: FC<Props> = ({ children, variant = "defaults", ...props }) => {
-  const StyledElement = variant === "defaults" ? StyledH1 : StyledText;
+const StyledH1 = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>, ChuzTheme>(
+  [createVariant({ themeKey, defaults: titleVariants.defaults })],
+  Text
+)
 
-  if (variant === "hidden") return null;
+const StyledText = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>, ChuzTheme>(
+  [createVariant({ themeKey, defaults: titleVariants.defaults })],
+  Text
+)
+
+interface Props extends TextProps {
+  variant?: 'defaults' | 'subtitle' | 'hidden'
+}
+
+export const Title: FC<Props> = ({ children, variant = 'defaults', ...props }) => {
+  const StyledElement = variant === 'defaults' ? StyledH1 : StyledText
+
+  if (variant === 'hidden') return null
 
   return (
     <StyledElement variant={variant} {...props}>
       {children}
     </StyledElement>
-  );
-};
+  )
+}
