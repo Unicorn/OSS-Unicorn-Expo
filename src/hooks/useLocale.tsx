@@ -28,6 +28,12 @@ export function useRoutesLocale(): (endpoint: string, options?: TranslationOptio
   return (endpoint: string, options?: TranslationOptions) => t(makeLocaleRouteKey(segments, endpoint), options)
 }
 
+export function useGlobalLocale(): (key: string, options?: TranslationOptions) => string {
+  const { t } = useTranslation()
+
+  return (key: string, options?: TranslationOptions) => t(key, options)
+}
+
 export function LocaleTranslate({ endpoint, children }: LocaleTranslateProps) {
   const segments = useSegments()
   const { locale } = useChuzContext()
