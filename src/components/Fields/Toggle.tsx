@@ -10,9 +10,7 @@ const themeKey = 'toggleVariants'
 
 export const toggleVariants: Partial<BaseTheme> = {
   defaults: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderWidth: 1,
   },
 }
 
@@ -49,7 +47,12 @@ export const Toggle: FC<Props> = () => {
     <View>
       <Pressable
         onPress={toggleSwitch}
-        style={[styles.switchContainer, { backgroundColor: isToggled ? colors.fieldAccentFocused : colors.fieldAccent_normal }]}
+        style={[
+          styles.switchContainer,
+          {
+            backgroundColor: isToggled ? colors.fieldAccent_focused : colors.fieldAccent_normal,
+          },
+        ]}
       >
         <Animated.View style={[styles.switch, { transform: [{ translateX: circleTransform }] }]} />
       </Pressable>

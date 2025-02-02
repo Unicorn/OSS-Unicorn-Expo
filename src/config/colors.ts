@@ -150,7 +150,7 @@ export const colors = {
    * Fields
    */
   field_select_menu_background: palette.neutral[0],
-  fieldAccent_normal: palette.neutral[100],
+  fieldAccent_normal: palette.neutral[300],
   fieldAccent_focused: palette.primary[500],
 
   /**
