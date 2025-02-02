@@ -162,7 +162,7 @@ export const chuzUIDark = createTheme({
     navItem_hovered: palette.secondary[500],
     navItem_active: palette.primary[500],
 
-    fieldAccent_normal: palette.neutral[100],
+    fieldAccent_normal: palette.neutral[300],
     fieldAccent_focused: palette.primary[500],
 
     /**

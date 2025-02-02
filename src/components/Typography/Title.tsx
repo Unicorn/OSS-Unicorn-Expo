@@ -7,7 +7,7 @@ import { ComponentProps, FC } from 'react'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
 import { ChuzTheme } from '../../types'
-import { fonts, spacing } from '../../config'
+import { fonts } from '../../config'
 
 const themeKey = 'titleVariants'
 
@@ -21,11 +21,9 @@ export const titleVariants: Partial<BaseTheme> = {
       desktop: 36,
     },
     fontWeight: 'bold',
-    paddingVertical: 's',
   },
   subtitle: {
     fontSize: 18,
-    paddingVertical: 'xs',
   },
 }
 
