@@ -32,10 +32,11 @@ interface Props extends ViewProps {
   handler: (v: number) => void
   step?: number
   disabled?: boolean
-  measurement?: '%'
+  prefix?: string
+  suffix?: string
 }
 
-export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, step = 10, disabled = false, measurement }) => {
+export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, step = 10, disabled = false, prefix, suffix }) => {
   // Note: we may consider moving 'value' out of the component
   // if it makes sense to have it managed by the parent component (ie: controlled component)
   const [isPanning, setIsPanning] = useState(false)
@@ -99,8 +100,9 @@ export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, s
       <View style={styles.meta}>
         {label && renderLabel()}
         <Text>
+          {prefix}
           {value.toFixed(0)}
-          {measurement}
+          {suffix}
         </Text>
       </View>
       <Styled>
@@ -122,6 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   label: {
+    color: 'text_color',
     fontSize: 16,
   },
 })
