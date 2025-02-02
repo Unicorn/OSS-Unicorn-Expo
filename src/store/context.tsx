@@ -12,11 +12,16 @@ import type { ChuzTheme, ChuzThemes, ChuzContextType, ChuzProviderProps } from '
 import { STORE, getItem, setItem } from './store'
 import i18next from 'i18next'
 
-export const ChuzContext = createContext<ChuzContextType>({ theme: 'light' } as ChuzContextType)
+export const ChuzContext = createContext<ChuzContextType>({
+  theme: 'light',
+  locale: 'dev',
+  setTheme: () => null,
+  setLocale: () => null,
+} as ChuzContextType)
 
 export const ChuzProvider: FC<ChuzProviderProps> = ({ children, translations }) => {
   const [theme, setTheme] = useState<ChuzThemes>('light')
-  const [locale, setLocale] = useState<string>('en-US')
+  const [locale, setLocale] = useState<string>('dev')
 
   let restyle: ChuzTheme
 
@@ -26,7 +31,7 @@ export const ChuzProvider: FC<ChuzProviderProps> = ({ children, translations }) 
   }
 
   const setLocaleHandler = async (locale: string) => {
-    await setItem(STORE.locale, locale)
+    setItem(STORE.locale, locale)
     i18next.changeLanguage(locale)
     setLocale(locale)
   }
@@ -43,7 +48,7 @@ export const ChuzProvider: FC<ChuzProviderProps> = ({ children, translations }) 
         setLocale(storedLocale)
       } else {
         const locales = getLocales()
-        const locale = locales[0]?.languageTag ?? 'en-US' ?? 'en-US'
+        const locale = (locales[0]?.languageTag ?? 'dev' ?? 'dev') as string
         setLocale(locale)
       }
     }

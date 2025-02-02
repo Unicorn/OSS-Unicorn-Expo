@@ -1,34 +1,28 @@
 /** @format */
 
-import { PressableProps, PressableStateCallbackType, StyleProp, View, ViewStyle } from 'react-native'
+import { ViewStyle } from 'react-native'
 
 import { ReactNode } from 'react'
 
 import { chuzUILight, chuzUIDark } from './theme'
 import { colors } from './config/colors'
-import { fontSizes } from './config/fonts'
-import { ButtonTypes } from './components'
-
-export type NestedTranslation = {
-  [key: string]: string | NestedTranslation
-}
 
 export type Translation = {
-  en: NestedTranslation
-  es: NestedTranslation
-  dev: NestedTranslation
+  [key: string]: string | Translation
 }
 
 export interface ChuzContextType {
   theme: ChuzThemes
-  locale: string | null
+  locale: string
   setTheme: (theme: ChuzThemes) => void
   setLocale: (locale: string) => void
 }
 
 export interface ChuzProviderProps {
   children: ReactNode
-  translations: Translation
+  translations: {
+    [key: string]: Translation
+  }
 }
 
 export type BreakpointOptions = 'mobile' | 'tablet' | 'desktop'
