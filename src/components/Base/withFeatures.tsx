@@ -1,4 +1,4 @@
-import { ComponentType, FC } from 'react'
+import { ReactElement } from 'react'
 import { ViewProps, ViewStyle, Platform } from 'react-native'
 import { useTheme } from '@shopify/restyle'
 
@@ -11,7 +11,7 @@ export interface FeatureProps extends ViewProps {
   style?: ViewStyle
 }
 
-export function withFeatures<P extends object>(Component: (props: P) => JSX.Element) {
+export function withFeatures<P extends object>(Component: (props: P) => ReactElement) {
   return function WithFeatures(props: P & FeatureProps) {
     const { style, elevation, radius, ...rest } = props
     const { colors } = useTheme()
