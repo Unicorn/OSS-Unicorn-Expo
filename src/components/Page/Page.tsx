@@ -1,9 +1,5 @@
-/** @format */
-
-import { StyleSheet, ScrollView, View, ViewProps, ScrollViewProps, NativeMethods } from 'react-native'
-
-import { ComponentProps, forwardRef, ReactNode } from 'react'
-
+import { StyleSheet, ScrollView, View, ViewProps, ScrollViewProps } from 'react-native'
+import { ReactNode } from 'react'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
 import { ChuzTheme } from '../../types'
@@ -17,7 +13,7 @@ export const pageVariants: Partial<BaseTheme> = {
   },
 }
 
-const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof View>, ChuzTheme>(
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ViewProps, ChuzTheme>(
   [createVariant({ themeKey, defaults: pageVariants.defaults })],
   View
 )
@@ -27,14 +23,12 @@ interface Props extends ViewProps {
   scrollProps?: ScrollViewProps
 }
 
-export const Page = forwardRef<ScrollView & NativeMethods, Props>(({ children, scrollProps, ...props }, ref) => {
+export function Page({ children, scrollProps, ...props }: Props) {
   return (
     <Styled {...props}>
-      <ScrollView {...scrollProps} ref={ref}>
-        {children}
-      </ScrollView>
+      <ScrollView {...scrollProps}>{children}</ScrollView>
     </Styled>
   )
-})
+}
 
 export const pageStyles = StyleSheet.create({})
