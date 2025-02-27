@@ -1,6 +1,4 @@
-/** @format */
-
-import { ComponentProps, FC, Fragment } from 'react'
+import { ComponentProps, Fragment } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 import { NavIcon } from './NavIcon'
@@ -31,7 +29,7 @@ interface Props extends PressableProps {
   showIcon?: boolean
 }
 
-export const NavItem: FC<Props> = ({ active, icon, label, showIcon, showLabel, ...props }) => {
+export const NavItem = ({ active, icon, label, showIcon, showLabel, ...props }: Props) => {
   const renderChildren = ({ pressed }: PressableStateCallbackType) => {
     return (
       <Fragment>

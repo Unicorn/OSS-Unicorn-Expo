@@ -1,8 +1,6 @@
-/** @format */
-
 import { Animated, Insets, ViewProps } from 'react-native'
 
-import { FC, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { useTheme } from '@shopify/restyle'
 import Svg, { Path } from 'react-native-svg'
@@ -19,7 +17,7 @@ interface Props extends ViewProps {
   duration?: number
 }
 
-export const LoadingIcon: FC<Props> = ({ animate = true, repeat = true, duration = 2000, size = 24, color, ...props }) => {
+export const LoadingIcon = ({ animate = true, repeat = true, duration = 2000, size = 24, color, ...props }: Props) => {
   const { colors } = useTheme()
   const pathLength = animate ? 500 : 0
   const dash = useRef(new Animated.Value(pathLength)).current

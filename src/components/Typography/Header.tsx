@@ -1,8 +1,6 @@
-/** @format */
-
 import { Text, TextProps } from 'react-native'
 
-import { ComponentProps, FC } from 'react'
+import { ComponentProps } from 'react'
 
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
@@ -41,6 +39,6 @@ interface Props extends TextProps {
   variant?: 'defaults' | 'h2' | 'h3'
 }
 
-export const Header: FC<Props> = ({ children, ...props }) => {
+export const Header = ({ children, ...props }: Props) => {
   return <Styled {...props}>{children}</Styled>
 }

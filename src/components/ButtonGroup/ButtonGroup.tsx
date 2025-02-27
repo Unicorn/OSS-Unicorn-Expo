@@ -40,7 +40,7 @@ interface Props extends FeatureProps {
   onChange?: (options: SelectOption[]) => void
 }
 
-export const ButtonGroupBase: FC<Props> = ({ buttons, buttonVariant, buttonType, selected, onSelect, onChange, divider, ...props }) => {
+export const ButtonGroupBase = ({ buttons, buttonVariant, buttonType, selected, onSelect, onChange, divider, ...props }: Props) => {
   const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>(selected ?? [])
   const { colors } = useTheme()
 

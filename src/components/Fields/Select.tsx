@@ -1,5 +1,3 @@
-/** @format */
-
 import { createRestyleComponent, VariantProps, createVariant, BaseTheme, useTheme } from '@shopify/restyle'
 import { useState, useRef, FC, ComponentProps, ReactNode, useEffect } from 'react'
 import { View, StyleSheet, ScrollView, Animated, Pressable } from 'react-native'
@@ -41,7 +39,7 @@ interface Props extends FeatureProps {
   defaultValue?: string
 }
 
-export const SelectBase: FC<Props> = ({
+export const SelectBase = ({
   variant,
   label,
   labelType = 'button',
@@ -52,7 +50,7 @@ export const SelectBase: FC<Props> = ({
   disabled,
   defaultValue,
   ...props
-}) => {
+}: Props) => {
   const _selected = typeof selected === 'object' ? selected : options.filter(o => o.value === selected)[0]
 
   const { colors } = useTheme()

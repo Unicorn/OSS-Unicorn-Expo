@@ -1,8 +1,6 @@
-/** @format */
-
 import { Linking } from 'react-native'
 
-import { ComponentProps, FC, useState, ReactNode } from 'react'
+import { ComponentProps, useState, ReactNode } from 'react'
 
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 import { Href, Link } from 'expo-router'
@@ -33,7 +31,7 @@ interface Props extends LinkProps {
   href: Href
 }
 
-export const A: FC<Props> = ({ children, href, ...props }) => {
+export const A = ({ children, href, ...props }: Props) => {
   const [isHovered, setIsHovered] = useState(false)
 
   const hoverHandler = () => setIsHovered(true)

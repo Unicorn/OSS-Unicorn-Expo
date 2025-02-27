@@ -1,8 +1,6 @@
-/** @format */
-
 import { View, ViewStyle } from 'react-native'
 
-import { ComponentProps, FC, ReactNode } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
@@ -28,7 +26,7 @@ export const cardVariants: Partial<BaseTheme> = {
   },
 }
 
-interface CardProps {
+interface Props {
   variant?: CardVariants
   children: ReactNode
   style?: ViewStyle
@@ -39,7 +37,7 @@ const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> &
   View
 )
 
-export const CardBase: FC<CardProps> = ({ variant = 'defaults', children }) => {
+export const CardBase = ({ variant = 'defaults', children }: Props) => {
   return <Styled variant={variant}>{children}</Styled>
 }
 

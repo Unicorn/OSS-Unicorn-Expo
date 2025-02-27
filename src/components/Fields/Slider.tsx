@@ -1,6 +1,4 @@
-/** @format */
-
-import { useState, useRef, FC, useEffect, useMemo, ReactNode, ComponentProps } from 'react'
+import { useState, useRef, useEffect, useMemo, ReactNode, ComponentProps } from 'react'
 import { View, Text, StyleSheet, PanResponder, ViewProps } from 'react-native'
 import { createRestyleComponent, VariantProps, createVariant, BaseTheme } from '@shopify/restyle'
 import { ChuzTheme } from '../../types'
@@ -36,7 +34,7 @@ interface Props extends ViewProps {
   suffix?: string
 }
 
-export const Slider: FC<Props> = ({ initialValue = 0, label, handler, step = 10, disabled = false, prefix, suffix }) => {
+export const Slider = ({ initialValue = 0, label, handler, step = 10, disabled = false, prefix, suffix }: Props) => {
   // Note: we may consider moving 'value' out of the component
   // if it makes sense to have it managed by the parent component (ie: controlled component)
   const [isPanning, setIsPanning] = useState(false)

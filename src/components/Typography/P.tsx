@@ -1,19 +1,19 @@
-import { StyleSheet, Text, TextProps } from "react-native";
+import { StyleSheet, Text, TextProps } from 'react-native'
 
-import { ComponentProps, FC } from "react";
+import { ComponentProps } from 'react'
 
-import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from "@shopify/restyle";
+import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
-import { ChuzTheme } from "../../types";
+import { ChuzTheme } from '../../types'
 
-const themeKey = "pVariants";
+const themeKey = 'pVariants'
 
 export const pVariants: Partial<BaseTheme> = {
   defaults: {
-    color: "text_color",
+    color: 'text_color',
     fontSize: 18,
     lineHeight: 24,
-    position: "relative",
+    position: 'relative',
     zIndex: 5,
   },
   small: {
@@ -24,19 +24,19 @@ export const pVariants: Partial<BaseTheme> = {
     fontSize: 22,
     lineHeight: 32,
   },
-};
-
-const Styled = createRestyleComponent<
-  VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>,
-  ChuzTheme
->([createVariant({ themeKey, defaults: pVariants.defaults })], Text);
-
-interface Props extends TextProps {
-  variant?: "defaults" | "small" | "large";
 }
 
-export const P: FC<Props> = ({ children, ...props }) => {
-  return <Styled {...props}>{children}</Styled>;
-};
+const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof Text>, ChuzTheme>(
+  [createVariant({ themeKey, defaults: pVariants.defaults })],
+  Text
+)
 
-export const pStyles = StyleSheet.create({});
+interface Props extends TextProps {
+  variant?: 'defaults' | 'small' | 'large'
+}
+
+export const P = ({ children, ...props }: Props) => {
+  return <Styled {...props}>{children}</Styled>
+}
+
+export const pStyles = StyleSheet.create({})

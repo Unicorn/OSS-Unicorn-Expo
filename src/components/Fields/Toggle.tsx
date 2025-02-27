@@ -1,12 +1,7 @@
-/** @format */
-
-import { createRestyleComponent, VariantProps, createVariant, BaseTheme, useTheme } from '@shopify/restyle'
+import { BaseTheme, useTheme } from '@shopify/restyle'
 import { useState, FC, ComponentProps } from 'react'
 import { View, Pressable, Animated, StyleSheet, ViewProps } from 'react-native'
-import { ChuzTheme } from '../../types'
 import { isNativeDriver } from '../../helpers'
-
-const themeKey = 'toggleVariants'
 
 export const toggleVariants: Partial<BaseTheme> = {
   defaults: {
@@ -14,16 +9,7 @@ export const toggleVariants: Partial<BaseTheme> = {
   },
 }
 
-const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> & ComponentProps<typeof View>, ChuzTheme>(
-  [createVariant({ themeKey, defaults: toggleVariants.defaults })],
-  View
-)
-
-interface Props extends ViewProps {
-  variant?: 'defaults'
-}
-
-export const Toggle: FC<Props> = () => {
+export const Toggle = () => {
   const { colors } = useTheme()
   const [isToggled, setIsToggled] = useState(false)
   const [animate] = useState(new Animated.Value(0))

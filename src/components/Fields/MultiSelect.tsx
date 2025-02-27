@@ -1,7 +1,5 @@
-/** @format */
-
 import { createRestyleComponent, VariantProps, createVariant, BaseTheme, useTheme } from '@shopify/restyle'
-import { useState, useRef, FC, ComponentProps, ReactNode, useEffect, Fragment } from 'react'
+import { useState, useRef, ComponentProps, ReactNode, useEffect, Fragment } from 'react'
 import { View, ScrollView, Animated } from 'react-native'
 import { randomUUID } from 'expo-crypto'
 import { isEqual } from 'lodash'
@@ -40,7 +38,7 @@ interface Props extends FeatureProps {
   onChange?: (options: SelectOption[]) => void
 }
 
-export const MultiSelectBase: FC<Props> = ({
+export const MultiSelectBase = ({
   label,
   style = { borderRadius: 0 },
   options = stubbedOptions,
@@ -48,7 +46,7 @@ export const MultiSelectBase: FC<Props> = ({
   onSelect,
   onChange,
   ...props
-}) => {
+}: Props) => {
   const { colors } = useTheme()
   const [opened, setOpened] = useState(false)
   const [selectedOptions, setSelectedOptions] = useState<SelectOption[]>(selected ?? options ?? [])

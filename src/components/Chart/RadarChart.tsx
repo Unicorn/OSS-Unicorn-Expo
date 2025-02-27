@@ -1,6 +1,3 @@
-/** @format */
-
-import { FC } from 'react'
 import { View, StyleSheet, Text, Platform, useWindowDimensions } from 'react-native'
 import { useTheme } from '@shopify/restyle'
 import { Svg, G, Defs, LinearGradient, Stop, Rect, Circle } from 'react-native-svg'
@@ -57,7 +54,7 @@ interface Props {
   dynamicSpacing?: true
 }
 
-export const RadarChart: FC<Props> = ({
+export const RadarChart = ({
   numberOfAxes,
   sets = stubbedSets,
   showSets = [0, 1, 2],
@@ -70,7 +67,7 @@ export const RadarChart: FC<Props> = ({
   labelWidth = 80,
   labelSpacing = 20,
   dynamicSpacing = true,
-}) => {
+}: Props) => {
   const { colors } = useTheme<ChuzTheme>()
 
   if (!sets || sets.length === 0 || sets[0] === undefined) {

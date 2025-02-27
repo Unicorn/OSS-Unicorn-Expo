@@ -1,6 +1,4 @@
-/** @format */
-
-import { createContext, FC, useState, useContext, useEffect, useMemo } from 'react'
+import { createContext, useState, useContext, useEffect, useMemo } from 'react'
 
 import { ThemeProvider } from '@shopify/restyle'
 import i18n from 'i18next'
@@ -8,7 +6,7 @@ import { initReactI18next } from 'react-i18next'
 import { getLocales } from 'expo-localization'
 
 import { chuzUILight, chuzUIDark } from '../theme'
-import type { ChuzTheme, ChuzThemes, ChuzContextType, ChuzProviderProps } from '../types'
+import type { ChuzThemes, ChuzContextType, ChuzProviderProps } from '../types'
 import { STORE, getItem, setItem } from './store'
 import i18next from 'i18next'
 
@@ -19,7 +17,7 @@ export const ChuzContext = createContext<ChuzContextType>({
   setLocale: () => null,
 } as ChuzContextType)
 
-export const ChuzProvider: FC<ChuzProviderProps> = ({ children, translations }) => {
+export const ChuzProvider = ({ children, translations }: ChuzProviderProps) => {
   const [theme, setTheme] = useState<ChuzThemes>('light')
   const [locale, setLocale] = useState<string>('dev')
   const restyle = useMemo(() => (theme === 'dark' ? chuzUIDark : chuzUILight), [theme])

@@ -1,8 +1,6 @@
-/** @format */
-
 import { Text, TextProps } from 'react-native'
 
-import { ComponentProps, FC } from 'react'
+import { ComponentProps } from 'react'
 
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant } from '@shopify/restyle'
 
@@ -41,7 +39,7 @@ interface Props extends TextProps {
   variant?: 'defaults' | 'subtitle' | 'hidden'
 }
 
-export const Title: FC<Props> = ({ children, variant = 'defaults', ...props }) => {
+export const Title = ({ children, variant = 'defaults', ...props }: Props) => {
   const StyledElement = variant === 'defaults' ? StyledH1 : StyledText
 
   if (variant === 'hidden') return null
