@@ -1,8 +1,6 @@
-/** @format */
-
 import { Pressable, PressableProps, PressableStateCallbackType, StyleProp, Text, TextStyle, ViewStyle } from 'react-native'
 
-import { ComponentProps, FC, Fragment, ReactNode } from 'react'
+import { ComponentProps, ComponentType, Fragment, ReactNode } from 'react'
 
 import { MaterialIcons } from '@expo/vector-icons'
 import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useTheme } from '@shopify/restyle'
@@ -10,7 +8,7 @@ import { BaseTheme, VariantProps, createRestyleComponent, createVariant, useThem
 import { ChuzTheme, SizeOptions } from '../../types'
 import { spacing, fontSizes } from '../../config'
 import { LoadingIcon } from '../Icons/LoadingIcon'
-import { withFeatures } from '../Base'
+import { FeatureProps, withFeatures } from '../Base'
 
 const themeKey = 'buttonVariants'
 
@@ -55,7 +53,7 @@ export interface ButtonProps extends Partial<PressableProps> {
   value?: string | number
 }
 
-export const ButtonBase: FC<ButtonProps> = ({
+export const ButtonBase = ({
   variant = 'defaults',
   type = 'neutral',
   size = 'm',
@@ -68,7 +66,7 @@ export const ButtonBase: FC<ButtonProps> = ({
   showLabel = true,
   style,
   ...props
-}) => {
+}: ButtonProps) => {
   const { colors } = useTheme<ChuzTheme>()
 
   const getColorForState = (t: 'background' | 'text' | 'border', state: PressableStateCallbackType): string => {

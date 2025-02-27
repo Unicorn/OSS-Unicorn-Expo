@@ -36,7 +36,7 @@ interface Props extends ViewProps {
   suffix?: string
 }
 
-export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, step = 10, disabled = false, prefix, suffix }) => {
+export const Slider: FC<Props> = ({ initialValue = 0, label, handler, step = 10, disabled = false, prefix, suffix }) => {
   // Note: we may consider moving 'value' out of the component
   // if it makes sense to have it managed by the parent component (ie: controlled component)
   const [isPanning, setIsPanning] = useState(false)
@@ -106,7 +106,7 @@ export const Slider: FC<Props> = ({ variant, initialValue = 0, label, handler, s
         </Text>
       </View>
       <Styled>
-        <View style={[styles.fill, { width: `${value}%`, backgroundColor: `hsl(171, ${50 + 0.3 * value}%, ${30 + 0.1 * value}%)` }]} />
+        <View style={[styles.fill, { width: `${value}%`, backgroundColor: `hsl(212, ${70 + 0.3 * value}%, ${20 + 0.1 * value}%)` }]} />
       </Styled>
     </View>
   )
