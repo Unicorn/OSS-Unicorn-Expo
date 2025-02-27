@@ -10,8 +10,6 @@ import type { ChuzThemes, ChuzContextType, ChuzProviderProps } from '../types'
 import { STORE, getItem, setItem } from './store'
 import i18next from 'i18next'
 
-import 'intl-pluralrules'
-
 export const ChuzContext = createContext<ChuzContextType>({
   theme: 'light',
   locale: 'dev',
