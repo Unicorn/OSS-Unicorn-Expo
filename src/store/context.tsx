@@ -44,21 +44,19 @@ export const ChuzProvider = ({ children, translations }: ChuzProviderProps) => {
         const locales = getLocales()
         setLocale(locales[0]?.languageTag ?? 'dev')
       }
+
+      i18n
+        .use(initReactI18next)
+        .init({
+          resources: translations,
+          lng: locale ?? 'dev',
+          interpolation: { escapeValue: false },
+        })
+        .catch(console.error)
     }
 
     loadSettings()
-  }, [])
-
-  useEffect(() => {
-    i18n
-      .use(initReactI18next)
-      .init({
-        resources: translations,
-        lng: locale,
-        interpolation: { escapeValue: false },
-      })
-      .catch(console.error)
-  }, [locale, translations])
+  }, [theme, locale, translations])
 
   return (
     <ChuzContext.Provider value={{ theme, locale, setTheme: setThemeHandler, setLocale: setLocaleHandler }}>
