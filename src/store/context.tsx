@@ -35,6 +35,7 @@ export const ChuzProvider = ({ children, initialLocale = 'dev', initialTheme = '
     })
   }
 
+  // Run once when the component is mounted, load settings from storage
   useEffect(() => {
     const loadSettings = async () => {
       const [storedTheme, storedLocale] = await Promise.all([getItem<ChuzThemes | null>(STORE.theme), getItem<string | null>(STORE.locale)])
@@ -58,7 +59,13 @@ export const ChuzProvider = ({ children, initialLocale = 'dev', initialTheme = '
     }
 
     loadSettings()
-  }, [theme, locale, translations])
+  }, [])
+
+  // Run when the theme or locale changes
+  useEffect(() => {
+    setItem(STORE.theme, theme).then(() => setTheme(theme))
+    setItem(STORE.locale, locale).then(() => setLocale(locale))
+  }, [theme, locale])
 
   return (
     <ChuzContext.Provider value={{ theme, locale, setTheme: setThemeHandler, setLocale: setLocaleHandler }}>
