@@ -37,22 +37,32 @@ export const ChuzProvider = ({ children, translations }: ChuzProviderProps) => {
     const loadSettings = async () => {
       const [storedTheme, storedLocale] = await Promise.all([getItem<ChuzThemes | null>(STORE.theme), getItem<string>(STORE.locale)])
 
-      if (storedTheme) setTheme(storedTheme)
-      if (storedLocale) {
-        setLocale(storedLocale)
-      } else {
+      // Determine final theme and locale values
+      const finalTheme = storedTheme || 'light'
+      let finalLocale = storedLocale
+
+      if (!finalLocale) {
         const locales = getLocales()
-        setLocale(locales[0]?.languageTag ?? 'dev')
+        finalLocale = locales[0]?.languageTag ?? 'dev'
+        // Store the default locale
+        await setItem(STORE.locale, finalLocale)
       }
 
-      i18n
-        .use(initReactI18next)
-        .init({
-          resources: translations,
-          lng: locale ?? 'dev',
-          interpolation: { escapeValue: false },
-        })
-        .catch(console.error)
+      // Update theme if needed
+      if (!storedTheme) {
+        await setItem(STORE.theme, finalTheme)
+      }
+
+      // Initialize i18n with final locale
+      await i18n.use(initReactI18next).init({
+        resources: translations,
+        lng: finalLocale,
+        interpolation: { escapeValue: false },
+      })
+
+      // Set state only once with final values
+      setTheme(finalTheme)
+      setLocale(finalLocale)
     }
 
     loadSettings()
