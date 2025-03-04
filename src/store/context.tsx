@@ -8,64 +8,71 @@ import { getLocales } from 'expo-localization'
 import { chuzUILight, chuzUIDark } from '../theme'
 import type { ChuzThemes, ChuzContextType, ChuzProviderProps } from '../types'
 import { STORE, getItem, setItem } from './store'
-import i18next from 'i18next'
 
 export const ChuzContext = createContext<ChuzContextType>({
   theme: 'light',
-  locale: 'dev',
-  initialLocale: 'dev',
-  initialTheme: 'light',
+  locale: 'en-US',
   setTheme: () => null,
   setLocale: () => null,
 } as ChuzContextType)
 
-export const ChuzProvider = ({ children, initialLocale = 'dev', initialTheme = 'light', translations }: ChuzProviderProps) => {
-  const [theme, setTheme] = useState<ChuzThemes>(initialTheme)
-  const [locale, setLocale] = useState<string>(initialLocale)
+export const ChuzProvider = ({ children, translations }: ChuzProviderProps) => {
+  const [theme, setTheme] = useState<ChuzThemes>('light')
+  const [locale, setLocale] = useState<string>('en-US')
   const restyle = useMemo(() => (theme === 'dark' ? chuzUIDark : chuzUILight), [theme])
 
-  const setThemeHandler = (t: ChuzThemes) => {
-    setItem(STORE.theme, t).then(() => setTheme(t))
-  }
-
-  const setLocaleHandler = async (locale: string) => {
-    setItem(STORE.locale, locale).then(() => {
-      i18next.changeLanguage(locale)
-      setLocale(locale)
+  // Initialize i18n with current locale
+  const initializeI18n = async (locale: string) => {
+    await i18n.use(initReactI18next).init({
+      resources: translations,
+      lng: locale,
+      interpolation: { escapeValue: false },
     })
   }
 
-  // Run once when the component is mounted, load settings from storage
+  const setThemeHandler = async (newTheme: ChuzThemes) => {
+    await setItem(STORE.theme, newTheme)
+    setTheme(newTheme)
+  }
+
+  const setLocaleHandler = async (newLocale: string) => {
+    await setItem(STORE.locale, newLocale)
+    await i18n.changeLanguage(newLocale)
+    setLocale(newLocale)
+  }
+
+  // Initial load of settings from storage
   useEffect(() => {
     const loadSettings = async () => {
       const [storedTheme, storedLocale] = await Promise.all([getItem<ChuzThemes | null>(STORE.theme), getItem<string | null>(STORE.locale)])
 
-      if (storedTheme) setTheme(storedTheme)
-      if (storedLocale) {
-        setLocale(storedLocale)
-      } else {
+      // Determine and set initial theme
+      const initialTheme = storedTheme || 'light'
+      if (!storedTheme) {
+        await setItem(STORE.theme, initialTheme)
+      }
+      setTheme(initialTheme)
+
+      // Determine and set initial locale
+      let initialLocale = storedLocale
+      if (!initialLocale) {
         const locales = getLocales()
-        setLocale(locales[0]?.languageTag ?? 'dev')
+        initialLocale = locales[0]?.languageTag ?? 'en-US'
+        await setItem(STORE.locale, initialLocale)
       }
 
-      i18n
-        .use(initReactI18next)
-        .init({
-          resources: translations,
-          lng: locale,
-          interpolation: { escapeValue: false },
-        })
-        .catch(console.error)
+      // Initialize i18n and set locale
+      await initializeI18n(initialLocale)
+      setLocale(initialLocale)
     }
 
     loadSettings()
-  }, [])
+  }, [translations])
 
-  // Run when the theme or locale changes
+  // Reinitialize i18n when locale changes
   useEffect(() => {
-    setItem(STORE.theme, theme).then(() => setTheme(theme))
-    setItem(STORE.locale, locale).then(() => setLocale(locale))
-  }, [theme, locale])
+    initializeI18n(locale)
+  }, [locale, translations])
 
   return (
     <ChuzContext.Provider value={{ theme, locale, setTheme: setThemeHandler, setLocale: setLocaleHandler }}>
