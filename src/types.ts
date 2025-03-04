@@ -20,6 +20,8 @@ export interface ChuzContextType {
 
 export interface ChuzProviderProps {
   children: ReactNode
+  initialLocale: string
+  initialTheme: ChuzThemes
   translations: {
     [key: string]: Translation
   }

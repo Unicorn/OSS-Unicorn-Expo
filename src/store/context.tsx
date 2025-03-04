@@ -13,13 +13,15 @@ import i18next from 'i18next'
 export const ChuzContext = createContext<ChuzContextType>({
   theme: 'light',
   locale: 'dev',
+  initialLocale: 'dev',
+  initialTheme: 'light',
   setTheme: () => null,
   setLocale: () => null,
 } as ChuzContextType)
 
-export const ChuzProvider = ({ children, translations }: ChuzProviderProps) => {
-  const [theme, setTheme] = useState<ChuzThemes>('light')
-  const [locale, setLocale] = useState<string>('dev')
+export const ChuzProvider = ({ children, initialLocale = 'dev', initialTheme = 'light', translations }: ChuzProviderProps) => {
+  const [theme, setTheme] = useState<ChuzThemes>(initialTheme)
+  const [locale, setLocale] = useState<string>(initialLocale)
   const restyle = useMemo(() => (theme === 'dark' ? chuzUIDark : chuzUILight), [theme])
 
   const setThemeHandler = (t: ChuzThemes) => {
@@ -35,34 +37,24 @@ export const ChuzProvider = ({ children, translations }: ChuzProviderProps) => {
 
   useEffect(() => {
     const loadSettings = async () => {
-      const [storedTheme, storedLocale] = await Promise.all([getItem<ChuzThemes | null>(STORE.theme), getItem<string>(STORE.locale)])
+      const [storedTheme, storedLocale] = await Promise.all([getItem<ChuzThemes | null>(STORE.theme), getItem<string | null>(STORE.locale)])
 
-      // Determine final theme and locale values
-      const finalTheme = storedTheme || 'light'
-      let finalLocale = storedLocale
-
-      if (!finalLocale) {
+      if (storedTheme) setTheme(storedTheme)
+      if (storedLocale) {
+        setLocale(storedLocale)
+      } else {
         const locales = getLocales()
-        finalLocale = locales[0]?.languageTag ?? 'dev'
-        // Store the default locale
-        await setItem(STORE.locale, finalLocale)
+        setLocale(locales[0]?.languageTag ?? 'dev')
       }
 
-      // Update theme if needed
-      if (!storedTheme) {
-        await setItem(STORE.theme, finalTheme)
-      }
-
-      // Initialize i18n with final locale
-      await i18n.use(initReactI18next).init({
-        resources: translations,
-        lng: finalLocale,
-        interpolation: { escapeValue: false },
-      })
-
-      // Set state only once with final values
-      setTheme(finalTheme)
-      setLocale(finalLocale)
+      i18n
+        .use(initReactI18next)
+        .init({
+          resources: translations,
+          lng: locale,
+          interpolation: { escapeValue: false },
+        })
+        .catch(console.error)
     }
 
     loadSettings()
