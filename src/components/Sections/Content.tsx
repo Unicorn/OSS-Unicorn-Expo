@@ -13,11 +13,16 @@ const themeKey = 'contentVariants'
 export const contentVariants: Partial<BaseTheme> = {
   defaults: {
     alignSelf: 'center',
+    backgroundColor: 'page_background',
     paddingVertical: 'xl',
     paddingHorizontal: 'l',
     minWidth: 300,
     maxWidth: breakpoints.desktop,
     width: '100%',
+  },
+  minimal: {
+    paddingVertical: 's',
+    paddingHorizontal: 'l',
   },
   surface: {
     backgroundColor: 'surface',
