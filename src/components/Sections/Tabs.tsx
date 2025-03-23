@@ -33,11 +33,8 @@ export const Tabs = ({
   tabTextStyle,
   activeTabTextStyle,
 }: TabsProps) => {
-
-
   return (
     <Content variant="minimal">
-      {title && <Header style={styles.titleText}>{title}</Header>}
       <View style={styles.tabContainer}>
         {tabs.map((tab) => (
           <Pressable
@@ -69,16 +66,9 @@ export const Tabs = ({
 };
 
 const styles = StyleSheet.create({
-  titleText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    alignSelf: "flex-start",
-  },
   tabContainer: {
     flexDirection: "row",
     width: "100%",
-    marginBottom: 20,
   },
   tabButton: {
     flex: 1,
@@ -91,13 +81,13 @@ const styles = StyleSheet.create({
     borderBottomColor: "transparent",
   },
   activeTab: {
-    borderBottomColor: 'primary',
+    borderBottomColor: 'fieldAccent_focused',
   },
   tabText: {
     fontSize: 16,
   },
   activeTabText: {
-    color: 'primary',
+    color: 'fieldAccent_focused',
     fontWeight: "bold",
   },
 });
