@@ -21,7 +21,7 @@ export const contentVariants: Partial<BaseTheme> = {
     width: '100%',
   },
   minimal: {
-    paddingVertical: 's',
+    paddingVertical: 'xs',
     paddingHorizontal: 'l',
   },
   surface: {
@@ -35,7 +35,7 @@ const Styled = createRestyleComponent<VariantProps<ChuzTheme, typeof themeKey> &
 )
 
 interface Props extends FeatureProps {
-  variant?: 'defaults' | 'surface'
+  variant?: 'defaults' | 'surface' | 'minimal'
   radius?: SizeOptions
   elevation?: SizeOptions
 }
